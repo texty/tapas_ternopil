@@ -1,0 +1,1 @@
+# tapas_ternopil
