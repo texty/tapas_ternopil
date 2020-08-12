@@ -1,0 +1,315 @@
+$charts_background: #f1e9de;
+
+
+@font-face {
+  font-family: 'e-Ukraine-Regular';
+  src: url('../font/e-Ukraine-Regular.eot'),
+  url('../font/e-Ukraine-Regular.eot?#iefix') format('embedded-opentype'),
+  url('../font/e-Ukraine-Regular.woff2') format('woff2'),
+  url('../font/e-Ukraine-Regular.woff') format('woff'),
+  url('../font/e-Ukraine-Regular.ttf') format('truetype');
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: 'e-Ukraine-Medium';
+  src: url('../font/e-Ukraine-Medium.eot'),
+  url('../font/e-Ukraine-Medium.eot?#iefix') format('embedded-opentype'),
+  url('../font/e-Ukraine-Medium.woff2') format('woff2'),
+  url('../font/e-Ukraine-Medium.woff') format('woff'),
+  url('../font/e-Ukraine-Medium.ttf') format('truetype');
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: 'e-Ukraine-Light';
+  src: url('../font/e-Ukraine-Light.eot'),
+  url('../font/e-Ukraine-Light.eot?#iefix') format('embedded-opentype'),
+  url('../font/e-Ukraine-Light.woff2') format('woff2'),
+  url('../font/e-Ukraine-Light.woff') format('woff'),
+  url('../font/e-Ukraine-Light.ttf') format('truetype');
+  font-weight: 300;
+  font-weight: thin;
+}
+
+body {
+  font-family: 'e-Ukraine-Regular', sans-serif;
+  margin:0;
+  padding:0;
+}
+
+main {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1.5fr;
+}
+
+h3 {
+  font-family: 'e-Ukraine-Regular', sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 28px;
+  line-height: 32px;
+  color: #000000;
+}
+
+h4 {
+  font-family: 'e-Ukraine-Regular', sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 24px;
+  line-height: 28px;
+  color: #000000;
+}
+
+
+p {
+  margin: auto 0;
+  padding: 0;
+  color: #000000;
+}
+
+p.ordinal, li {
+  font-family: 'e-Ukraine-Regular', sans-serif;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 24px;
+  color: #000000;
+}
+
+.small {
+  font-family: 'e-Ukraine-Light', sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 20px;
+  margin: 0 0 20px 0;
+  color: #000000;
+}
+
+
+.select-wrapper {
+  max-width: 800px;
+  width: 100%;
+  margin: auto 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  justify-content: center;
+  @media(max-width: 812px){
+    display: block;
+  }
+}
+
+select {
+  text-indent: 5px
+}
+
+
+select, .recipient_model  {
+  display: flex;
+  width: 95%;
+  border: 2px solid #000000;
+  box-sizing: border-box;
+  border-radius: 100px;
+  height: 3.5rem;
+  margin: 30px 5px;
+  max-width: 350px;
+  padding: 10px;
+  font-size: 13px;
+  background-color: white; ;
+  font-family: 'e-Ukraine-Regular', sans-serif;
+  font-style: normal;
+  font-weight: 300;
+  line-height: 18px;
+  color: #000000;
+  box-sizing: border-box;
+  position: relative;
+  vertical-align: middle;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-position: 96% 50%;
+  background-repeat: no-repeat;
+  background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8c3ZnIHdpZHRoPSIxNCIgaGVpZ2h0PSI4IiB2aWV3Qm94PSIwIDAgMTQgOCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICAgIDxwYXRoIGQ9Ik0xMy4wMjQxIDEuNTEyTDcuMzY4MSA3LjE2OEM3LjIxODIxIDcuMzE3IDcuMDE1NDUgNy40MDA2MyA2LjgwNDEgNy40MDA2M0M2LjU5Mjc1IDcuNDAwNjMgNi4zODk5OSA3LjMxNyA2LjI0MDEgNy4xNjhMMC42MDAwOTcgMS41MTJMMS43MjgxIDAuMzg0TDYuODE2MSA1LjQ3MkwxMS45MDQxIDAuMzg0TDEzLjAyNDEgMS41MTJaIiBmaWxsPSIjMkQ1Q0E2IiAvPgo8L3N2Zz4=);
+
+  @media(max-width: 1100px){
+    font-size: 12px;
+  }
+  @media(max-width: 812px){
+    display: block;
+    max-width: calc(100% - 10px);
+    width: calc(100% - 10px);
+    margin: 10px 0;
+  }
+}
+
+select:focus, #recipient-select:focus {
+  outline: none;
+}
+
+#recipient-select {
+  width: calc(100% - 10px);
+  display: flex;
+}
+
+.recipient_model p {
+  width: 90%;
+}
+
+ul.dropdown {
+  //display: none;
+  background-color: white;
+  list-style-type: none;
+  padding: 10px;
+  position: absolute;
+  margin: -30px auto 0 7px;
+  height: 300px;
+  width: calc(100% - 35px);
+  overflow-y: auto;
+  border-radius: 2px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  @media(max-width: 800px){
+    margin: -7px auto 0 7px;
+  }
+
+
+  li {
+    font-family: 'e-Ukraine-Light', sans-serif;
+    font-weight: 100;
+    font-size: 13px;
+    color: #6d727c;
+    margin-bottom: 10px;
+    width: 100%;
+    cursor: pointer;
+
+  }
+}
+
+.hidden {
+  display: none;
+}
+
+.chart-block-wrapper {
+  margin: 50px 0;
+  width: 100%;
+  transition: all 2s;
+  background-color: $charts_background;
+}
+
+#chart-block-1, #chart-block-2, #chart-block-3, #chart-block-4 {
+  padding: 50px;
+  margin: 50px auto;
+  display: grid;
+  grid-template-columns: 0.8fr 1fr 1fr;
+  width: calc(100% - 100px);
+  max-width: 1200px;
+  transition: all 2s;
+  @media(max-width: 1000px){
+    grid-template-columns: 0.7fr 1fr;
+  }
+
+  @media(max-width: 800px){
+    display: block;
+    padding: 10px;
+    width: 96%;
+    /* margin: 50px 0;
+    width: 100%; */
+  }
+
+  h3, p, .select-wrapper {
+    grid-column: 1/-1;
+  }
+
+  .description {
+    grid-row: 4/5;
+    grid-column: 3/4;
+    margin: 60px 0 0 10%;
+    width: 90%;
+    @media(max-width: 1000px){
+      grid-column: 1/3;
+      margin: 30px 0;
+    }
+  }
+
+  .col-1 {
+    @media(max-width: 800px){
+      display: none;
+    }
+  }
+
+  .col-1-2 {
+    grid-column: 1/3;
+  }
+}
+
+.y.axis > path.domain, .y-axis > path.domain {
+  display: none;
+}
+
+.y-axis .tick line {
+  display: none;
+}
+
+.y-axis .tick text {
+  font-family: 'e-Ukraine-Light', sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 20px;
+  margin: 0 0 20px 0;
+  color: #000000;
+}
+
+.tick text {
+  font-family: 'e-Ukraine-Regular', sans-serif;
+}
+
+rect {
+  //transition: all 1s;
+}
+
+.stacked-legend-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1.2fr;
+  justify-content: space-around;
+  margin: 30px 0;
+  @media(max-width: 1000px){
+    grid-template-columns: 1fr;
+  }
+
+  p {
+    grid-column: span 1 !important;
+    display: flex;
+    align-items: center;
+    margin: 0 20px 0 5px;
+
+  }
+}
+
+.stacked-legend {
+  margin-top: 5px;
+  margin-right: 1em;
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  border-radius: 3px;
+
+}
+
+//tippy
+.tippy-tooltip.tomato-theme {
+  font-family: 'e-Ukraine-Regular', sans-serif;
+  letter-spacing: 0.5px;
+  color:white;
+
+}
+
+.axisWrapper text {
+  font-size:12px !important;
+  display:none;
+}
+
+.hidden {
+  display: none;
+}
+

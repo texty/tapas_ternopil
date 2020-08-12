@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Title</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap"
+          rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/css/select2.css" rel="stylesheet">
+
+    <link href="css/style.css" rel="stylesheet"/>
+</head>
+<body>
+
+<div class="chart-block-wrapper">
+    <div id="chart-block-1">
+        <!-- назва  -->
+        <h3>Назва графіку</h3>
+        <p class="ordinal">
+            Оберіть рік, тип грошового внеску, благодійника та навчальний заклад:
+        </p>
+
+        <!-- селектори -->
+        <div class="select-wrapper">
+            <select class="year_model">
+                <option value="" selected>Оберіть опцію зі списку</option>
+            </select>
+
+            <select class="type_model">
+                <option value="" selected>Оберіть опцію зі списку</option>
+            </select>
+
+            <div style="width: 100%; position: relative;">
+                <div class="recipient_model">
+                    <p>Оберіть опцію зі списку</p>
+                </div>
+                <ul class="dropdown">
+                    <li class="option small" value="">
+                        Оберіть опцію зі списку
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- grid-column-3 -->
+        <div class="description">
+            <p class="ordinal">
+                На графіках наведені рейтинги навчальних закладів та категорій
+                витрат благодійних внесків. Ви можете обрати тип навчального закладу
+                “Школа” (сюди входять і заклади професійно-технічної освіти) або
+                “ДНЗ” (дошкільний навчальний заклад), обрати рік , за який ви хочете
+                отримати інформацію, навчальний заклад та благодійника. Клікаючи на
+                назву навчального закладу або категорію ви побачите відповідні
+                рейтинги
+            </p>
+        </div>
+
+        <!-- grid-column-1 -->
+        <div class="col-1">
+            <p class="small" style="margin-left: 30px;">
+                сума коштів витрачена<br/>бенефіціаром, тис грн
+            </p>
+            <svg id="chart_1" class="svgWrapper" width="100%" height="100%"></svg>
+        </div>
+
+        <!-- grid-column-2 -->
+        <div class="col-2">
+            <p class="small" style="margin-left: 150px;">
+                сума коштів за типами<br/>продукції, тис грн
+            </p>
+            <svg id="chart_2" class="svgWrapper" width="100%" height="550"></svg>
+        </div>
+    </div>
+    </div>
+
+
+
+    <!-------------------------------------
+     -------------Блок 2 ------------------
+     -------------------------------------->
+    <div class="chart-block-wrapper">
+        <div id="chart-block-2">
+            <!-- назва  -->
+            <h3>Назва графіку</h3>
+            <p class="ordinal">
+                Оберіть рік, тип грошового внеску, благодійника та навчальний заклад:
+            </p>
+
+            <!-- селектори -->
+            <div class="select-wrapper">
+                <select class="year_model">
+                    <option value="" selected>Оберіть опцію зі списку</option>
+                </select>
+
+                <select class="type_model">
+                    <option value="" selected>Оберіть опцію зі списку</option>
+
+                </select>
+
+                <div style="width: 100%; position: relative;">
+                    <div class="recipient_model">
+                        <p>Оберіть опцію зі списку</p>
+                    </div>
+                    <ul class="dropdown">
+                        <li class="option small" value="">
+                            Оберіть опцію зі списку
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="description">
+                <p class="ordinal">
+                    На графіку відображені пожертви в часі, ви можете проаналізувати їх
+                    у розрізі місяців
+                </p>
+            </div>
+
+            <div class="col-1-2">
+                <svg id="chart_3" class="svgWrapper" width="100%" height="620"></svg>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-------------------------------------
+     -------------Блок 3 ------------------
+     -------------------------------------->
+    <div class="chart-block-wrapper">
+        <div id="chart-block-3">
+            <!-- назва  -->
+            <h3>Назва графіку</h3>
+            <p class="ordinal">
+                Оберіть рік, тип грошового внеску, благодійника та навчальний заклад:
+            </p>
+
+            <!-- селектори -->
+            <div class="select-wrapper">
+                <select class="year_model">
+                    <option value="" selected>Оберіть опцію зі списку</option>
+                </select>
+
+                <!--<div class="no_options">-->
+                    <!--<p>Школи та інше</p>-->
+                <!--</div>-->
+
+                <div style="width: 100%; position: relative;">
+                    <div class="recipient_model">
+                        <p>Оберіть опцію зі списку</p>
+                    </div>
+                    <ul class="dropdown">
+                        <li class="option small" value="">
+                            Оберіть опцію зі списку
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="description">
+                <p class="ordinal">
+                    На графіку відображені пожертви в часі, ви можете проаналізувати їх
+                    у розрізі місяців
+                </p>
+            </div>
+
+            <div class="col-1-2">
+                <div class="stacked-legend-wrapper">
+                    <p class="small"><span class="stacked-legend" style="border: 1px solid #AA2B8E"></span> <span>Заплановані витрати</span>
+                    </p>
+                    <p class="small"><span class="stacked-legend" style="background-color: #007EFF"></span> <span>Бюджетні кошти</span>
+                    </p>
+                    <p class="small"><span class="stacked-legend" style="background-color: #AA2B8E66"></span><span> Внести негрошові</span>
+                    </p>
+                    <p class="small"><span class="stacked-legend" style="background-color: #007EFF33"></span> <span>Внести в грошовому еквівленті</span>
+                    </p>
+
+                </div>
+
+                <svg id="chart_4" class="svgWrapper" width="100%"></svg>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <!-------------------------------------
+     -------------Блок 4 ------------------
+     -------------------------------------->
+    <div class="chart-block-wrapper">
+        <div id="chart-block-4">
+            <!-- назва  -->
+            <h3>Назва графіку</h3>
+            <p class="ordinal">
+                Оберіть рік, тип грошового внеску, благодійника та навчальний заклад:
+            </p>
+
+            <!-- селектори -->
+            <div class="select-wrapper">
+                <select class="year_model">
+                    <option value="" selected>Оберіть опцію зі списку</option>
+                </select>
+
+                <select class="type_model">
+                    <option value="" selected>Оберіть опцію зі списку</option>
+                </select>
+
+                <div style="width: 100%; position: relative;">
+                    <div class="recipient_model">
+                        <p>Оберіть опцію зі списку</p>
+                    </div>
+                    <ul class="dropdown">
+                        <li class="option small" value="">
+                            Оберіть опцію зі списку
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+        <div class="description">
+            <p class="ordinal">
+                На графіку відображені пожертви в часі, ви можете проаналізувати їх
+                у розрізі місяців
+            </p>
+        </div>
+
+        <div class="col-1-2">
+            <svg id="chart_5" class="svgWrapper" width="100%" height="620"></svg>
+
+        </div>
+    </div>
+</div>
+
+
+    <script src="lib/d3v5.min.js"></script>
+    <script src="lib/underscore-min.js"></script>
+
+    <script src="js/variables.js"></script>
+    <script src="js/draw__1.js"></script>
+    <script src="js/draw__2.js"></script>
+    <script src="js/draw__3.js"></script>
+    <script src="js/draw__4.js"></script>
+    <script src="js/draw__5.js"></script>
+
+    <script src="js/main.js"></script>
+
+
+</body>
+</html>
