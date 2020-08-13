@@ -10,7 +10,7 @@ const svg_2 = d3.select("#chart_2")
     .append("g")
     .attr("transform", "translate(150,30)");
 
-var detail_xScale = d3.scaleLinear().range([0, detail_width]);
+var detail_xScale = d3.scaleLinear();
 var detail_yScale = d3.scaleBand().range([0, detail_height]);
 
 //Add group for the x axis
@@ -25,9 +25,16 @@ svg_2.append("g")
     .attr("transform", "translate(-5,0)");
 
 
-function draw_detail(df){   
+function draw_detail(df){
+    var new_width =  d3.select("#chart-block-1").select(".col-2").node().getBoundingClientRect().width - detail_margin.left - detail_margin.right;
+
+    d3.select("#chart_2")
+        .attr("width", new_width + detail_margin.left + detail_margin.right);
+
+
     //Update the scales
     detail_xScale
+        .range([0, new_width])
         .domain([0, d3.max(df, function (d) { return d.sum;  })]);
 
     detail_yScale
@@ -51,7 +58,9 @@ function draw_detail(df){
         .duration(transition_time)
         .call(d3.axisTop(detail_xScale)
             .ticks(3)
-            .tickSizeOuter(0));
+            .tickSizeOuter(0)
+            .tickFormat(d3.format(".2s"))
+        );
 
 
     var detail_bar = svg_2.selectAll(".detail")

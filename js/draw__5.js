@@ -2,26 +2,21 @@
  * Created by yevheniia on 12.08.20.
  */
 const scatter_margin = {top: 40, right: 10, bottom: 30, left: 120},
-    scatter_width = d3.select("#chart_3").node().getBoundingClientRect().width - scatter_margin.left - scatter_margin.right,
+    //scatter_width = d3.select("#chart_3").node().getBoundingClientRect().width - scatter_margin.left - scatter_margin.right,
     scatter_height = 500 - scatter_margin.top - scatter_margin.bottom;
 
 
 const svg_5 = d3.select("#chart_5")
     .attr("class", "svgWrapper")
-    .attr("width", scatter_width + scatter_margin.left + scatter_margin.right)
+    //.attr("width", scatter_width + scatter_margin.left + scatter_margin.right)
     .attr("height", scatter_height + scatter_margin.top + scatter_margin.bottom)
     .append("g")
     .attr("transform", "translate(" + scatter_margin.left + "," + 0 + ")");
 
-var scatter_x1 = d3.scaleBand()
-    .range([0, scatter_width])
-    .padding([0.2]);
+var scatter_x1 = d3.scaleBand().padding([0.1]);
+var scatter_x2 = d3.scaleBand();
 
-var scatter_x2 = d3.scaleBand()
-    .padding([0.05]);
-
-var scatter_yScale = d3
-    .scaleBand();
+var scatter_yScale = d3.scaleBand();
 
 var scatter_rScale = d3
     .scaleLinear()
@@ -42,17 +37,22 @@ svg_5.append("g")
 function draw_scatter(df){
     //Update the scales
 
-
+    var new_width = d3.select("#chart-block-4").select(".col-1-2").node().getBoundingClientRect().width - scatter_margin.left - scatter_margin.right;
     var new_height = df.y_domain.length * 17;
 
-    d3.select("#chart_5").attr("height", new_height + stacked_margin.top);
+    d3.select("#chart_5")
+        .attr("width", new_width + scatter_margin.left + scatter_margin.right)
+        .attr("height", new_height + stacked_margin.top);
 
     scatter_x1
-        .domain([1,2,3,4,5,6,7,8,9,10,11,12]);
+        .range([0, new_width])
+        .domain([1,2,3,4,5,6,7,8,9,10,11,12])
+        ;
 
     scatter_x2
         .domain([1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31])
-        .range([0, scatter_x1.bandwidth()]);
+        .range([0, scatter_x1.bandwidth()])
+      ;
 
     scatter_yScale
         .rangeRound([0, df.y_domain.length * 17])
@@ -93,6 +93,12 @@ function draw_scatter(df){
 
     group.exit().remove();
 
+    group
+        .attr("transform", function(d){
+            let key = parseInt(d.key);
+            return `translate(${scatter_x1(key)}, 30)`
+    });
+
     group.enter()
         .append("g")
         .attr("class", "group")
@@ -112,11 +118,10 @@ function draw_scatter(df){
     circles
         .transition().duration(transition_time)
         .attr("cx", function (k) {
-
             return scatter_x2(k.day)}
         )
         .attr("cy", function (k) { return scatter_yScale(k.category);  })
-        .attr("r", 3);
+        .attr("r", function(d){ return scatter_rScale(d.sum)});
 
 
     circles.enter().append("circle")
@@ -124,7 +129,6 @@ function draw_scatter(df){
         .style("fill", saturatedBlue)
         .transition().duration(transition_time)
         .attr("cx", function (k) {
-
             return scatter_x2(k.day)
         })
         .attr("cy", function (k) { return scatter_yScale(k.category);  })

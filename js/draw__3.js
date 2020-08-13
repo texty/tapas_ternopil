@@ -29,11 +29,18 @@ svg_3.append("g")
 
 
 function draw_time(df){
+
+    var new_width = d3.select("#chart-block-2").select(".col-1-2").node().getBoundingClientRect().width - time_margin.left - time_margin.right;
+    
+    d3.select("#chart_3")
+        .attr("width", new_width + time_margin.left + time_margin.right);
+
     //Update the scales
     time_yScale
         .domain([0, d3.max(df, function (d) { return d.sum;  })]);
 
     time_xScale
+        .range([0, new_width])
         .domain(['1','2','3','4','5','6','7','8','9','10','11','12']);
 
 
@@ -66,6 +73,8 @@ function draw_time(df){
         .attr("x", function (d, i) { return time_xScale(d.month);  })
         .attr("width",  time_xScale.bandwidth() )
         .attr("height", function (d) { return time_height - time_yScale(d.sum)})
+        .attr("rx", time_xScale.bandwidth() / 2 )
+        .attr("ry", time_xScale.bandwidth() / 2 );
 
     time_bar.enter().append("rect")
         .attr("class", "detail")

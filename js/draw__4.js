@@ -15,8 +15,7 @@ const svg_4 = d3.select("#chart_4")
     .attr("transform", "translate(" + stacked_margin.left + "," + 0 + ")");
 
 var stacked_xScale = d3
-    .scaleLinear()
-    .rangeRound([0,  stacked_width]);
+    .scaleLinear();
 
 
 var stacked_yScale = d3
@@ -45,11 +44,16 @@ var stacked_color = d3
 
 function draw_stacked(df){
 
+    var new_width = d3.select("#chart-block-3").select(".col-1-2").node().getBoundingClientRect().width - stacked_margin.left - stacked_margin.right;
     var new_height = df.y_domain.length * 17;
-    d3.select("#chart_4").attr("height", new_height + stacked_margin.top);
+
+    d3.select("#chart_4")
+        .attr("width", new_width + stacked_margin.left + stacked_margin.right)
+        .attr("height", new_height + stacked_margin.top);
 
 
     stacked_xScale
+        .rangeRound([0,  new_width])
         .domain([0, df.x_domain]);
 
     stacked_yScale

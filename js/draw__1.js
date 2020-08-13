@@ -68,7 +68,8 @@ main_yZoom = d3.scaleLinear()
 //Create x axis object
 main_xAxis = d3.axisTop(main_xScale)
     .ticks(2)
-    .tickSizeOuter(0);
+    .tickSizeOuter(0)
+    .tickFormat(d3.format(".2s"));
 
 //Add group for the x axis
 d3.select(".mainGroupWrapper")
