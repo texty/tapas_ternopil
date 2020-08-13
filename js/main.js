@@ -10,6 +10,24 @@ Promise.all([
     d3.csv("data/chart3_data.csv")
 ]).then(function(input){
 
+
+
+
+    // tippy('.tip', {
+    //     arrow: true,
+    //     inertia: true,
+    //     size: 'small',
+    //     duration: 500,
+    //     allowHTML: true,
+    //     trigger: "mouseenter",
+    //     interactive: true,
+    //     onShow(tip) {
+    //         tip.setContent(tip.reference.getAttribute('data-tippy-content'))
+    //     }
+    // });
+
+
+
     input[0].forEach(function(d) {
         d.valueAmount = +d.valueAmount;
         d.month = d.date
@@ -441,14 +459,13 @@ Promise.all([
     draw_stacked(calculate__4(input[1]));
     draw_scatter(calculate__5(input[0]));
 
+
     d3.select(window).on('resize', function() {
         draw_detail(calculate__2(input[0]));
         draw_time((calculate__3(input[0])));
         draw_stacked(calculate__4(input[1]));
         draw_scatter(calculate__5(input[0]));
     });
-
-
 
 
 
@@ -617,6 +634,8 @@ Promise.all([
              .data(df, function (d) { return d.key;  });
 
          bar
+             .attr("id", function (d) { return d.school_id  })
+             .attr("xVal", function (d) { return main_yScale(d.school_id)  })
              .attr("y", function (d, i) {  return main_yScale(d.school_id);   })
              .attr("height", main_yScale.bandwidth() - 3)
              .style("fill", transparentBlue)
@@ -624,15 +643,27 @@ Promise.all([
              .attr("width", function (d) { return main_xScale(d.sum);   });
 
          bar.enter().append("rect")
-             .attr("class", "bar")
+             .attr("class", "bar tip")
+             .attr("id", function (d) { return d.school_id  })
              .attr("xVal", function (d) { return main_yScale(d.school_id)  })
              .style("fill", transparentBlue )
+             .attr("data-tippy-content", function(d) {
+                 let name = recipient_options.find(function(k){
+                     return k.recipientID === d.school_id
+                 });
+                 return name.recipientName + ": " + d3.format(".2s")(d.sum) })
              .on("click", function (d) {
+                 let id = d3.select(this).attr("id");
+
+                 let name = recipient_options.find(function(d){
+                     return d.recipientID === id
+                 });
+                 d3.select("#chart-block-1").select(".recipient_model > p").attr("value", id).text(name.recipientName.substring(0, 40));
+                 draw_detail(calculate__2(input[0]));
                  d3.select(".mainGroup").selectAll(".bar").style("fill", transparentBlue);
                  d3.select(this).style("fill", saturatedBlue);
              })
              .attr("y", function (d, i) {  return main_yScale(d.school_id);   })
-
              .attr("height", main_yScale.bandwidth() - 3)
              .attr("rx", 6)
              .attr("ry", 6)
@@ -641,6 +672,17 @@ Promise.all([
 
          bar.exit()
              .remove();
+
+         tippy('.tip', {
+             content: 'Global content',
+             duration: 0,
+             onShow(tip) {
+                 tip.setContent(tip.reference.getAttribute('data-tippy-content'))
+             }
+
+         });
+
+
 
      } //update end
 

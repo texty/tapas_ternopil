@@ -26,7 +26,7 @@ svg_2.append("g")
 
 
 function draw_detail(df){
-    var new_width =  d3.select("#chart-block-1").select(".col-2").node().getBoundingClientRect().width - detail_margin.left - detail_margin.right;
+    var new_width =  d3.select("#grid-clone").select("#col-2-clone").node().getBoundingClientRect().width - detail_margin.left - detail_margin.right;
 
     d3.select("#chart_2")
         .attr("width", new_width + detail_margin.left + detail_margin.right);
@@ -72,20 +72,22 @@ function draw_detail(df){
         .attr("height", detail_yScale.bandwidth() - 3)
         .attr("y", function (d, i) { return detail_yScale(d.category);  })
         .transition().duration(zero_duration)
-        .attr("width", function (d) { return detail_xScale(d.sum);  });
+        .attr("width", function (d) { return detail_xScale(d.sum);  })
+        .attr("data-tippy-content", function(d) { return d3.format(".2s")(d.sum)});
 
     detail_bar.enter().append("rect")
-            .attr("class", "detail")
-            .attr("xVal", function (d) { return detail_yScale(d.category) })
-            .attr("x", 0)
-            .attr("y", function (d, i) { return detail_yScale(d.category); })
-            .attr("height", detail_yScale.bandwidth() - 3)
-            .attr("rx", 6)
-            .attr("ry", 6)
-            .style("fill", saturatedBlue)
-            .attr("width", 0 )
-            .transition().duration(zero_duration)
-            .attr("width", function (d) { return detail_xScale(d.sum);  });
+        .attr("data-tippy-content", function(d) { return d3.format(".2s")(d.sum)})
+        .attr("class", "detail tip")
+        .attr("xVal", function (d) { return detail_yScale(d.category) })
+        .attr("x", 0)
+        .attr("y", function (d, i) { return detail_yScale(d.category); })
+        .attr("height", detail_yScale.bandwidth() - 3)
+        .attr("rx", 6)
+        .attr("ry", 6)
+        .style("fill", saturatedBlue)
+        .attr("width", 0 )
+        .transition().duration(zero_duration)
+        .attr("width", function (d) { return detail_xScale(d.sum);  });
 
     detail_bar.exit().remove();        
 }

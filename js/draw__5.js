@@ -18,9 +18,8 @@ var scatter_x2 = d3.scaleBand();
 
 var scatter_yScale = d3.scaleBand();
 
-var scatter_rScale = d3
-    .scaleLinear()
-    .range([3, 10]);
+var scatter_rScale = d3.scaleSqrt()
+    .range([2, 9]);
 
 //Add group for the x axis
 svg_5
@@ -38,7 +37,7 @@ function draw_scatter(df){
     //Update the scales
 
     var new_width = d3.select("#chart-block-4").select(".col-1-2").node().getBoundingClientRect().width - scatter_margin.left - scatter_margin.right;
-    var new_height = df.y_domain.length * 17;
+    var new_height = df.y_domain.length * 17 + scatter_margin.top;
 
     d3.select("#chart_5")
         .attr("width", new_width + scatter_margin.left + scatter_margin.right)
@@ -61,7 +60,6 @@ function draw_scatter(df){
     scatter_rScale
         .domain([0, d3.max(df.data, function(array) {
             return d3.max(array.values, function(d){
-
                 return  d.sum })
             })
         ]);
@@ -78,13 +76,13 @@ function draw_scatter(df){
             .tickSizeOuter(0)
         );
 
-    // svg_5.select(".x-axis")
-    //     .attr("transform", "translate(" + 0 + "," + new_height + ")")
-    //     .transition()
-    //     .duration(transition_time)
-    //     .call(d3.axisBottom(time_xScale)
-    //         .ticks(3)
-    //         .tickSizeOuter(0));
+    svg_5.select(".x-axis")
+        .attr("transform", "translate(" + 0 + "," + new_height + ")")
+        .transition()
+        .duration(transition_time)
+        .call(d3.axisBottom(scatter_x1)
+            .ticks(3)
+            .tickSizeOuter(0));
 
 
 
@@ -121,20 +119,33 @@ function draw_scatter(df){
             return scatter_x2(k.day)}
         )
         .attr("cy", function (k) { return scatter_yScale(k.category);  })
-        .attr("r", function(d){ return scatter_rScale(d.sum)});
+        .attr("r", function(d){ return scatter_rScale(d.sum)})
+        .attr("data-tippy-content", function(d) { return d3.format(".2s")(d.sum)});
 
 
     circles.enter().append("circle")
-        .attr("class", "circle")        
+        .attr("class", "circle tip")        
         .style("fill", saturatedBlue)
+        .style("opacity", 0,8)
         .transition().duration(transition_time)
         .attr("cx", function (k) {
             return scatter_x2(k.day)
         })
         .attr("cy", function (k) { return scatter_yScale(k.category);  })
         //.attr("r", 3)
-        .attr("r", function(d){ return scatter_rScale(d.sum)});
+        .attr("r", function(d){ return scatter_rScale(d.sum)})
+        .attr("data-tippy-content", function(d) { return d3.format(".2s")(d.sum)});
 
 
     circles.exit().remove();
+
+    tippy('.tip', {
+        content: 'Global content',
+        duration: 0,
+        onShow(tip) {
+            tip.setContent(tip.reference.getAttribute('data-tippy-content'))
+        }
+
+    });
+
 }

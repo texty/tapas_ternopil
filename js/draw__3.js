@@ -49,7 +49,7 @@ function draw_time(df){
         .duration(transition_time)
         .call(d3.axisLeft(time_yScale)
             .tickSize(0)
-            .tickFormat(d3.format(".0s"))
+            .tickFormat(d3.format(".2s"))
             .tickSizeOuter(0)
         );
 
@@ -74,10 +74,11 @@ function draw_time(df){
         .attr("width",  time_xScale.bandwidth() )
         .attr("height", function (d) { return time_height - time_yScale(d.sum)})
         .attr("rx", time_xScale.bandwidth() / 2 )
-        .attr("ry", time_xScale.bandwidth() / 2 );
+        .attr("ry", time_xScale.bandwidth() / 2 )
+        .attr("data-tippy-content", function(d) { return d3.format(".2s")(d.sum)});
 
     time_bar.enter().append("rect")
-        .attr("class", "detail")
+        .attr("class", "detail tip")
         .attr("rx", time_xScale.bandwidth() / 2 )
         .attr("ry", time_xScale.bandwidth() / 2 )
         .style("fill", saturatedBlue)
@@ -85,8 +86,19 @@ function draw_time(df){
         .attr("y", function (d) { return time_yScale(d.sum)})
         .attr("x", function (d, i) { return time_xScale(d.month);  })
         .attr("width",  time_xScale.bandwidth() )
-        .attr("height", function (d) { return time_height - time_yScale(d.sum)});
+        .attr("height", function (d) { return time_height - time_yScale(d.sum)})
+        .attr("data-tippy-content", function(d) { return d3.format(".2s")(d.sum)});
 
 
     time_bar.exit().remove();
+
+    tippy('.tip', {
+        content: 'Global content',
+        duration: 0,
+        onShow(tip) {
+            tip.setContent(tip.reference.getAttribute('data-tippy-content'))
+        }
+
+    });
+
 }

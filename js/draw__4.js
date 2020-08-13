@@ -87,7 +87,7 @@ function draw_stacked(df){
 
     plans.enter()
         .append("rect")
-        .attr("class", "plans")
+        .attr("class", "plans tip")
         .attr("stroke", "#AA2B8E")
         .attr("fill", "transparent")
         .style("opacity", "0.5")
@@ -97,10 +97,12 @@ function draw_stacked(df){
         .attr("height", stacked_yScale.bandwidth())
         .attr("rx", stacked_yScale.bandwidth() / 2)
         .attr("ry", stacked_yScale.bandwidth() /2 )
+        .attr("data-tippy-content", function(d) { return d3.format(".3s")(d.data.plans)})
         .merge(plans)
         .attr("y", function (d) { return stacked_yScale(d.data.wide_cat); })
         .attr("x", 0 )
         .attr("height", stacked_yScale.bandwidth())
+        .attr("data-tippy-content", function(d) { return d3.format(".3s")(d.data.plans)})
         .transition().duration(transition_time)
         .attr("width", function (d) {  return stacked_xScale(d.data.plans) });
 
@@ -124,6 +126,7 @@ function draw_stacked(df){
 
     bars.enter()
         .append("rect")
+        .attr("class", "tip")
         .attr("width", function (d) {
             return stacked_xScale(d[1]) - stacked_xScale(d[0]) })
         .attr("y", function (d) {  return stacked_yScale(d.data.wide_cat); })
@@ -131,12 +134,24 @@ function draw_stacked(df){
         .attr("height", stacked_yScale.bandwidth())
         .attr("rx", stacked_yScale.bandwidth() / 2)
         .attr("ry", stacked_yScale.bandwidth() /2 )
+        .attr("data-tippy-content", function(d) { return d3.format(".2s")(d[1])})
         .merge(bars)
         .attr("height", stacked_yScale.bandwidth())
         .attr("y", function (d) { return stacked_yScale(d.data.wide_cat); })
         .attr("x", function (d) { return stacked_xScale(d[0]); })
         .transition().duration(transition_time)
+        .attr("data-tippy-content", function(d) { return d3.format(".2s")(d[1])})
         .attr("width", function (d) { return stacked_xScale(d[1]) - stacked_xScale(d[0]) });
+
+
+    tippy('.tip', {
+        content: 'Global content',
+        duration: 0,
+        onShow(tip) {
+            tip.setContent(tip.reference.getAttribute('data-tippy-content'))
+        }
+
+    });
 
 
 }
