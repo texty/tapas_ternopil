@@ -48,9 +48,9 @@ function draw_time(df){
         .transition()
         .duration(transition_time)
         .call(d3.axisLeft(time_yScale)
-            .tickSize(0)
+            .tickSize(-new_width)
             .tickFormat(d3.format(".2s"))
-            .tickSizeOuter(0)
+
         );
 
     svg_3.select(".x-axis")
@@ -58,8 +58,8 @@ function draw_time(df){
         .duration(transition_time)
         .call(d3.axisBottom(time_xScale)
             .ticks(3)
-
-            .tickSizeOuter(0));
+            .tickSize(0)
+        );
 
 
     var time_bar = svg_3.selectAll(".detail")
