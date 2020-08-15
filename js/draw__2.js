@@ -1,4 +1,4 @@
-const detail_margin = {top: 40, right: 10, bottom: 30, left: 150},
+const detail_margin = {top: 40, right: 20, bottom: 30, left: 150},
       detail_width = d3.select("#chart_2").node().getBoundingClientRect().width - detail_margin.left - detail_margin.right,
       detail_height = 500 - detail_margin.top - detail_margin.bottom;
 

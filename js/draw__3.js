@@ -19,8 +19,8 @@ var time_yScale = d3.scaleLinear().range([time_height, 0]);
 //Add group for the x axis
 svg_3
     .append("g")
-    .attr("class", "x-axis")
-    .attr("transform", "translate(" + 0 + "," + time_height + ")");
+    .attr("class", "x-axis");
+
 
 //Add group for the y axis
 svg_3.append("g")
@@ -31,13 +31,17 @@ svg_3.append("g")
 function draw_time(df){
 
     var new_width = d3.select("#chart-block-2").select(".col-1-2").node().getBoundingClientRect().width - time_margin.left - time_margin.right;
+    var new_height = new_width > 500 ? (500 - time_margin.top - time_margin.bottom) : (300 - time_margin.top - time_margin.bottom);
     
     d3.select("#chart_3")
-        .attr("width", new_width + time_margin.left + time_margin.right);
+        .attr("width", new_width + time_margin.left + time_margin.right)
+        .attr("height", new_height + time_margin.top + time_margin.bottom);
 
     //Update the scales
     time_yScale
+        .range([new_height, 0])
         .domain([0, d3.max(df, function (d) { return d.sum;  })]);
+
 
     time_xScale
         .range([0, new_width])
@@ -54,6 +58,7 @@ function draw_time(df){
         );
 
     svg_3.select(".x-axis")
+        .attr("transform", "translate(" + 0 + "," + new_height + ")")
         .transition()
         .duration(transition_time)
         .call(d3.axisBottom(time_xScale)
@@ -72,7 +77,7 @@ function draw_time(df){
         .attr("y", function (d) { return time_yScale(d.sum)})
         .attr("x", function (d, i) { return time_xScale(d.month);  })
         .attr("width",  time_xScale.bandwidth() )
-        .attr("height", function (d) { return time_height - time_yScale(d.sum)})
+        .attr("height", function (d) { return new_height - time_yScale(d.sum)})
         .attr("rx", time_xScale.bandwidth() / 2 )
         .attr("ry", time_xScale.bandwidth() / 2 )
         .attr("data-tippy-content", function(d) { return d3.format(".2s")(d.sum)});
@@ -86,7 +91,7 @@ function draw_time(df){
         .attr("y", function (d) { return time_yScale(d.sum)})
         .attr("x", function (d, i) { return time_xScale(d.month);  })
         .attr("width",  time_xScale.bandwidth() )
-        .attr("height", function (d) { return time_height - time_yScale(d.sum)})
+        .attr("height", function (d) { return new_height - time_yScale(d.sum)})
         .attr("data-tippy-content", function(d) { return d3.format(".2s")(d.sum)});
 
 

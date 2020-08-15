@@ -17,16 +17,18 @@ function getSelectedValues(parent, df){
 
     if(parent === "#chart-block-1"|| parent === "#chart-block-2" || parent === "#chart-block-4"){
         arr = [
-            { key: "year", value: d3.select(parent).select(".year_model").node().value },
-            { key: "type", value: d3.select(parent).select(".type_model").node().value  },
+            { key: "year", value: d3.select(parent).select(".year_model > p").attr("value") },
+            { key: "type", value: d3.select(parent).select(".type_model  > p").attr("value")  },
             { key: "recipientID", value: d3.select(parent).select(".recipient_model > p").attr("value") }
         ].filter(function (d) { return d.value != "" && d.value !== null; });
     }  else if( parent === "#chart-block-3"){
         arr = [
-            { key: "year", value: d3.select(parent).select(".year_model").node().value },
+            { key: "year", value: d3.select(parent).select(".year_model > p").attr("value") },
             { key: "recipientID", value: d3.select(parent).select(".recipient_model > p").attr("value") }
         ].filter(function (d) { return d.value != "" && d.value !== null; });
     }
+
+
 
     var filtered_arr;
 
@@ -36,6 +38,9 @@ function getSelectedValues(parent, df){
     } else if (arr.length === 1) {
         if(arr[0].key === 'recipientID'){ update = false }
         filtered_arr = df.filter(function(d, i) {
+            if(d[arr[0].key] === arr[0].value){
+                console.log("teur");
+            }
             return d[arr[0].key] === arr[0].value;
         });
 
