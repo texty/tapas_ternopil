@@ -1,6 +1,5 @@
 $charts_background: #FFF7E3;
 
-
 @font-face {
   font-family: 'e-Ukraine-Regular';
   src: url('../font/e-Ukraine-Regular.eot'),
@@ -38,6 +37,9 @@ body {
 }
 
 
+/*-----------------------------------
+--------------- header --------------
+-------------------------------------*/
 header {
   position: relative;
   background-color: $charts_background;
@@ -50,66 +52,34 @@ header {
     margin: auto;
     display: grid;
     grid-template-columns: repeat(12, 1fr);
-
-    @media(min-width: 1680px){
+    @media(min-width: 1680px) {
       width: 1408px;
     }
-    @media(min-width: 1280px) and (max-width: 1679px){
+    @media(min-width: 1280px) and (max-width: 1679px) {
       width: 1120px;
     }
-    @media(min-width: 992px) and (max-width: 1279px){
+    @media(min-width: 992px) and (max-width: 1279px) {
       width: 864px;
     }
-    @media(max-width: 991px) and (min-width: 480px){
+    @media(max-width: 991px) and (min-width: 480px) {
       width: 448px;
       display: block;
     }
-    @media(max-width: 479px){
+    @media(max-width: 479px) {
       width: 100%;
       display: block;
     }
-
-
-    .image-container {
-      width: 100%;
-      grid-column: 6/13;
-      grid-row: 1/2;
-
-      img {
-        width: 100%;
-        @media(max-width: 991px){
-          margin-top: -5vh;
-        }
-      }
-    }
   }
 
-  h1 {
-    width: 80%;
-    font-family: 'e-Ukraine-Regular', sans-serif;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 56px;
-    line-height: 60px;
-    letter-spacing: -0.02em;
-    @media(max-width: 1280px) and (min-width: 992px){
-      width: 80%;
-      font-size: calc(25px + 1vw);
-      line-height: calc(35px + 1vw);
-    }
-    @media(max-width: 991px){
+  .image-container {
+    width: 100%;
+    grid-column: 6/13;
+    grid-row: 1/2;
+
+    img {
       width: 100%;
-      margin: auto;
-      font-size: 32px;
-      line-height: 38px;
-    }
-    @media(max-width: 479px){
-      width: 90%;
-      margin: auto;
     }
   }
-
-
 
 
   .title-wrapper {
@@ -120,10 +90,35 @@ header {
     .title {
       margin: auto;
       @media(max-width: 991px){
-        margin: 50px auto;
+        margin: 50px 0;
       }
-    }
-  }
+      @media(max-width: 479px){
+        width: 90%;
+        margin:  50px auto;
+      }
+
+      h1 {
+        width: 80%;
+        font-family: 'e-Ukraine-Regular', sans-serif;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 56px;
+        line-height: 60px;
+        letter-spacing: -0.02em;
+        @media(max-width: 1280px) and (min-width: 992px){
+          width: 80%;
+          font-size: calc(25px + 1vw);
+          line-height: calc(35px + 1vw);
+        }
+        @media(max-width: 991px){
+          width: 100%;
+          margin: auto;
+          font-size: 32px;
+          line-height: 38px;
+        }
+      }
+    } // title end
+  } // title-wrapper end
 
 
   .logo-wrapper {
@@ -171,7 +166,9 @@ header {
         }
       }
 
-      #cyfra, #usaid, #eurasia {
+      #cyfra,
+      #usaid,
+      #eurasia {
         max-height: 40px;
         height: calc(20px + 2vw);
         @media(max-width:991px){
@@ -191,18 +188,15 @@ header {
         max-height: 20px;
       }
 
-    }
-  }
+    } // logo list end
+  } // logo wrapper end
 }
 
 
-main {
-  display: grid;
-  grid-template-columns: 1fr 2fr 1.5fr;
-}
+/* ---------------------------------------
+   -----------  основний текст ---------- */
 
 h2 {
-  //width: 80%;
   font-family: 'e-Ukraine-Regular', sans-serif;
   font-style: normal;
   font-weight: normal;
@@ -210,13 +204,30 @@ h2 {
   line-height: 40px;
   letter-spacing: -0.02em;
   @media(max-width: 1120px){
-    width: 80%;
     font-size: calc(22px + 1vw);
     line-height: calc(24px + 2vw);
   }
 }
 
-p {
+h3 {
+  font-family: 'e-Ukraine-Regular', sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 28px;
+  line-height: 32px;
+  color: #000000;
+}
+
+h4 {
+  font-family: 'e-Ukraine-Regular', sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 24px;
+  line-height: 28px;
+  color: #000000;
+}
+
+p, li {
   margin: 10px 0;
   grid-column: 1/3;
   font-family: 'e-Ukraine-Regular', sans-serif;
@@ -225,12 +236,18 @@ p {
   font-size: 16px;
   line-height: 24px;
   letter-spacing: -0.02em;
-
 }
 
+.small {
+  font-family: 'e-Ukraine-Light', sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 20px;
+  margin: 0 0 20px 0;
+  color: #000000;
+}
 
-/* ---------------------------------------
-   -----------  основний текст ---------- */
 
 .text {
   margin: 50px auto;
@@ -255,6 +272,8 @@ p {
     display: block;
   }
 
+
+  //особливості h2 для .text
   h2 {
     font-style: normal;
     font-weight: normal;
@@ -263,18 +282,24 @@ p {
     line-height: 40px;
     letter-spacing: -0.02em;
   }
-
-
 }
+
+/* ---------------------------------------
+   ----------------  врізка ------------- */
 
 .incut {
   background-color: #E6EBE6;
 }
 
+/* ---------------------------------------
+   ---------------- відступ ------------- */
+
 .chapter {
   margin-top: 100px;
 }
 
+/* ---------------------------------------
+   ------  блок з цифрографікою --------- */
 
 .attention-block {
   grid-column: 1/3;
@@ -297,45 +322,8 @@ p {
 
 
 
-/* -------  графіки  ------- */
-h3 {
-  font-family: 'e-Ukraine-Regular', sans-serif;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 28px;
-  line-height: 32px;
-  color: #000000;
-}
-
-h4 {
-  font-family: 'e-Ukraine-Regular', sans-serif;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 24px;
-  line-height: 28px;
-  color: #000000;
-}
-
-p.ordinal, li {
-  font-family: 'e-Ukraine-Regular', sans-serif;
-  font-style: normal;
-  font-weight: 300;
-  font-size: 16px;
-  line-height: 24px;
-  color: #000000;
-}
-
-.small {
-  font-family: 'e-Ukraine-Light', sans-serif;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 12px;
-  line-height: 20px;
-  margin: 0 0 20px 0;
-  color: #000000;
-}
-
-
+/* -----------------------------
+   ----------  графіки -------- */
 .select-wrapper {
   max-width: 800px;
   width: 100%;
@@ -348,17 +336,14 @@ p.ordinal, li {
   }
 }
 
-select {
-  text-indent: 5px
-}
-
 .model-wrapper {
   width: 90%;
   position: relative;
   margin-right: auto
 }
 
-select, .recipient_model, .model  {
+.recipient_model,
+.model  {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -367,11 +352,9 @@ select, .recipient_model, .model  {
   margin: 30px 5px 0 0;
   max-width: 350px;
   padding: 10px;
-  //font-size: 13px;
   font-family: 'e-Ukraine-Regular', sans-serif;
   font-style: normal;
   font-weight: 300;
-  //line-height: 18px;
   color: #000000;
   box-sizing: border-box;
   position: relative;
@@ -408,7 +391,8 @@ select, .recipient_model, .model  {
   border-bottom: 7px solid black;
 }
 
-select:focus, #recipient-select:focus {
+select:focus,
+#recipient-select:focus {
   outline: none;
 }
 
@@ -419,12 +403,10 @@ select:focus, #recipient-select:focus {
 
 .recipient_model p {
   width: 90%;
-  //font-size: 14px;
-  //line-height: 20px;
 }
 
-ul.dropdown {  z-index: 10000;
-
+ul.dropdown {
+  z-index: 10000;
   list-style-type: none;
   padding: 10px 0;
   position: absolute;
@@ -441,7 +423,7 @@ ul.dropdown {  z-index: 10000;
     font-weight: 300;
     font-size: 14px;
     line-height: 20px;
-    color: #6d727c;
+    color: #000;
     margin-bottom: 10px;
     padding: 0 10px;
     cursor: pointer;
@@ -452,7 +434,8 @@ ul.dropdown {  z-index: 10000;
   }
 }
 
-.dropdown.year, .dropdown.type {
+.dropdown.year,
+.dropdown.type {
   width: 100%;
 }
 
@@ -471,7 +454,11 @@ ul.dropdown {  z-index: 10000;
 }
 
 
-#chart-block-1, #chart-block-2, #chart-block-3, #chart-block-4, #grid-clone {
+#chart-block-1,
+#chart-block-2,
+#chart-block-3,
+#chart-block-4,
+#grid-clone {
     display: grid;
     grid-template-columns: 0.7fr 1fr 1fr;
     @media(min-width: 1680px){
@@ -495,7 +482,9 @@ ul.dropdown {  z-index: 10000;
     }
 
 
-  h3, p, .select-wrapper {
+  h3,
+  p,
+  .select-wrapper {
     grid-column: 1/-1;
   }
 
@@ -510,13 +499,15 @@ ul.dropdown {  z-index: 10000;
     }
   }
 
-  .col-1, #col-1-clone {
+  .col-1,
+  #col-1-clone {
     @media(max-width: 992px){
       display: none;
     }
   }
 
-  .сol-2, #col-2-clone {
+  .сol-2,
+  #col-2-clone {
     grid-column: 2/3;
     max-width: 100%;
   }
@@ -526,7 +517,10 @@ ul.dropdown {  z-index: 10000;
   }
 }
 
-#chart-block-1, #chart-block-2, #chart-block-3, #chart-block-4 {
+#chart-block-1,
+#chart-block-2,
+#chart-block-3,
+#chart-block-4 {
   margin: 50px auto;
 }
 
@@ -534,7 +528,8 @@ ul.dropdown {  z-index: 10000;
   height: 0;
 }
 
-.y.axis > path.domain, .y-axis > path.domain {
+.y.axis > path.domain,
+.y-axis > path.domain {
   display: none;
 }
 
@@ -557,18 +552,11 @@ ul.dropdown {  z-index: 10000;
   font-size: 10px;
 }
 
-rect {
-  //transition: all 1s;
-}
-
 .stacked-legend-wrapper {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1.2fr;
   justify-content: space-around;
   margin: 30px 0;
-  //@media(max-width: 1000px){
-  //  grid-template-columns: 1fr;
-  //}
 
   p {
     grid-column: span 1 !important;
@@ -585,19 +573,14 @@ rect {
   margin-top: 5px;
   margin-right: 1em;
   display: inline-block;
-  //width: 15px;
-  //height: 15px;
   padding: 2px;
   border-radius: 3px;
-
 }
 
-//tippy
 .tippy-tooltip.tomato-theme {
   font-family: 'e-Ukraine-Regular', sans-serif;
   letter-spacing: 0.5px;
   color:white;
-
 }
 
 .axisWrapper text {

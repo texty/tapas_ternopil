@@ -16,6 +16,9 @@ body {
   margin: 0;
   padding: 0; }
 
+/*-----------------------------------
+--------------- header --------------
+-------------------------------------*/
 header {
   position: relative;
   background-color: #FFF7E3;
@@ -44,38 +47,12 @@ header {
       header .content {
         width: 100%;
         display: block; } }
-    header .content .image-container {
-      width: 100%;
-      grid-column: 6/13;
-      grid-row: 1/2; }
-      header .content .image-container img {
-        width: 100%; }
-        @media (max-width: 991px) {
-          header .content .image-container img {
-            margin-top: -5vh; } }
-  header h1 {
-    width: 80%;
-    font-family: 'e-Ukraine-Regular', sans-serif;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 56px;
-    line-height: 60px;
-    letter-spacing: -0.02em; }
-    @media (max-width: 1280px) and (min-width: 992px) {
-      header h1 {
-        width: 80%;
-        font-size: calc(25px + 1vw);
-        line-height: calc(35px + 1vw); } }
-    @media (max-width: 991px) {
-      header h1 {
-        width: 100%;
-        margin: auto;
-        font-size: 32px;
-        line-height: 38px; } }
-    @media (max-width: 479px) {
-      header h1 {
-        width: 90%;
-        margin: auto; } }
+  header .image-container {
+    width: 100%;
+    grid-column: 6/13;
+    grid-row: 1/2; }
+    header .image-container img {
+      width: 100%; }
   header .title-wrapper {
     display: flex;
     grid-column: 1/6;
@@ -84,7 +61,30 @@ header {
       margin: auto; }
       @media (max-width: 991px) {
         header .title-wrapper .title {
+          margin: 50px 0; } }
+      @media (max-width: 479px) {
+        header .title-wrapper .title {
+          width: 90%;
           margin: 50px auto; } }
+      header .title-wrapper .title h1 {
+        width: 80%;
+        font-family: 'e-Ukraine-Regular', sans-serif;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 56px;
+        line-height: 60px;
+        letter-spacing: -0.02em; }
+        @media (max-width: 1280px) and (min-width: 992px) {
+          header .title-wrapper .title h1 {
+            width: 80%;
+            font-size: calc(25px + 1vw);
+            line-height: calc(35px + 1vw); } }
+        @media (max-width: 991px) {
+          header .title-wrapper .title h1 {
+            width: 100%;
+            margin: auto;
+            font-size: 32px;
+            line-height: 38px; } }
   header .logo-wrapper {
     grid-column: 1/-1;
     position: absolute;
@@ -126,11 +126,15 @@ header {
         @media (max-width: 991px) {
           header .logo-wrapper .logo-list img {
             margin: 0.5em; } }
-      header .logo-wrapper .logo-list #cyfra, header .logo-wrapper .logo-list #usaid, header .logo-wrapper .logo-list #eurasia {
+      header .logo-wrapper .logo-list #cyfra,
+      header .logo-wrapper .logo-list #usaid,
+      header .logo-wrapper .logo-list #eurasia {
         max-height: 40px;
         height: calc(20px + 2vw); }
         @media (max-width: 991px) {
-          header .logo-wrapper .logo-list #cyfra, header .logo-wrapper .logo-list #usaid, header .logo-wrapper .logo-list #eurasia {
+          header .logo-wrapper .logo-list #cyfra,
+          header .logo-wrapper .logo-list #usaid,
+          header .logo-wrapper .logo-list #eurasia {
             height: calc(30px + 2vw); } }
       header .logo-wrapper .logo-list #ukaid {
         max-height: 50px;
@@ -141,10 +145,8 @@ header {
       header .logo-wrapper .logo-list #texty {
         max-height: 20px; }
 
-main {
-  display: grid;
-  grid-template-columns: 1fr 2fr 1.5fr; }
-
+/* ---------------------------------------
+   -----------  основний текст ---------- */
 h2 {
   font-family: 'e-Ukraine-Regular', sans-serif;
   font-style: normal;
@@ -154,11 +156,26 @@ h2 {
   letter-spacing: -0.02em; }
   @media (max-width: 1120px) {
     h2 {
-      width: 80%;
       font-size: calc(22px + 1vw);
       line-height: calc(24px + 2vw); } }
 
-p {
+h3 {
+  font-family: 'e-Ukraine-Regular', sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 28px;
+  line-height: 32px;
+  color: #000000; }
+
+h4 {
+  font-family: 'e-Ukraine-Regular', sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 24px;
+  line-height: 28px;
+  color: #000000; }
+
+p, li {
   margin: 10px 0;
   grid-column: 1/3;
   font-family: 'e-Ukraine-Regular', sans-serif;
@@ -168,8 +185,15 @@ p {
   line-height: 24px;
   letter-spacing: -0.02em; }
 
-/* ---------------------------------------
-   -----------  основний текст ---------- */
+.small {
+  font-family: 'e-Ukraine-Light', sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 20px;
+  margin: 0 0 20px 0;
+  color: #000000; }
+
 .text {
   margin: 50px auto;
   display: grid;
@@ -200,12 +224,18 @@ p {
     line-height: 40px;
     letter-spacing: -0.02em; }
 
+/* ---------------------------------------
+   ----------------  врізка ------------- */
 .incut {
   background-color: #E6EBE6; }
 
+/* ---------------------------------------
+   ---------------- відступ ------------- */
 .chapter {
   margin-top: 100px; }
 
+/* ---------------------------------------
+   ------  блок з цифрографікою --------- */
 .attention-block {
   grid-column: 1/3; }
 
@@ -220,40 +250,8 @@ p {
       .attention text {
         font-size: calc(40px + 2vw); } }
 
-/* -------  графіки  ------- */
-h3 {
-  font-family: 'e-Ukraine-Regular', sans-serif;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 28px;
-  line-height: 32px;
-  color: #000000; }
-
-h4 {
-  font-family: 'e-Ukraine-Regular', sans-serif;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 24px;
-  line-height: 28px;
-  color: #000000; }
-
-p.ordinal, li {
-  font-family: 'e-Ukraine-Regular', sans-serif;
-  font-style: normal;
-  font-weight: 300;
-  font-size: 16px;
-  line-height: 24px;
-  color: #000000; }
-
-.small {
-  font-family: 'e-Ukraine-Light', sans-serif;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 12px;
-  line-height: 20px;
-  margin: 0 0 20px 0;
-  color: #000000; }
-
+/* -----------------------------
+   ----------  графіки -------- */
 .select-wrapper {
   max-width: 800px;
   width: 100%;
@@ -265,15 +263,13 @@ p.ordinal, li {
     .select-wrapper {
       display: block; } }
 
-select {
-  text-indent: 5px; }
-
 .model-wrapper {
   width: 90%;
   position: relative;
   margin-right: auto; }
 
-select, .recipient_model, .model {
+.recipient_model,
+.model {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -290,10 +286,12 @@ select, .recipient_model, .model {
   position: relative;
   vertical-align: middle; }
   @media (max-width: 1100px) {
-    select, .recipient_model, .model {
+    .recipient_model,
+    .model {
       font-size: 12px; } }
   @media (max-width: 812px) {
-    select, .recipient_model, .model {
+    .recipient_model,
+    .model {
       max-width: calc(100% - 10px);
       width: calc(100% - 10px);
       margin: 10px 0; } }
@@ -317,7 +315,8 @@ select, .recipient_model, .model {
   border-right: 7px solid transparent;
   border-bottom: 7px solid black; }
 
-select:focus, #recipient-select:focus {
+select:focus,
+#recipient-select:focus {
   outline: none; }
 
 #recipient-select {
@@ -344,14 +343,15 @@ ul.dropdown {
     font-weight: 300;
     font-size: 14px;
     line-height: 20px;
-    color: #6d727c;
+    color: #000;
     margin-bottom: 10px;
     padding: 0 10px;
     cursor: pointer; }
   ul.dropdown li:hover {
     background-color: #E7EEF3; }
 
-.dropdown.year, .dropdown.type {
+.dropdown.year,
+.dropdown.type {
   width: 100%; }
 
 .dropdown.recipient {
@@ -365,55 +365,127 @@ ul.dropdown {
   width: 100%;
   background-color: #FFF7E3; }
 
-#chart-block-1, #chart-block-2, #chart-block-3, #chart-block-4, #grid-clone {
+#chart-block-1,
+#chart-block-2,
+#chart-block-3,
+#chart-block-4,
+#grid-clone {
   display: grid;
   grid-template-columns: 0.7fr 1fr 1fr; }
   @media (min-width: 1680px) {
-    #chart-block-1, #chart-block-2, #chart-block-3, #chart-block-4, #grid-clone {
+    #chart-block-1,
+    #chart-block-2,
+    #chart-block-3,
+    #chart-block-4,
+    #grid-clone {
       width: 1408px; } }
   @media (min-width: 1280px) and (max-width: 1679px) {
-    #chart-block-1, #chart-block-2, #chart-block-3, #chart-block-4, #grid-clone {
+    #chart-block-1,
+    #chart-block-2,
+    #chart-block-3,
+    #chart-block-4,
+    #grid-clone {
       max-width: 1120px; } }
   @media (min-width: 992px) and (max-width: 1279px) {
-    #chart-block-1, #chart-block-2, #chart-block-3, #chart-block-4, #grid-clone {
+    #chart-block-1,
+    #chart-block-2,
+    #chart-block-3,
+    #chart-block-4,
+    #grid-clone {
       width: 864px;
       grid-template-columns: 0.7fr 1fr; } }
   @media (max-width: 991px) and (min-width: 480px) {
-    #chart-block-1, #chart-block-2, #chart-block-3, #chart-block-4, #grid-clone {
+    #chart-block-1,
+    #chart-block-2,
+    #chart-block-3,
+    #chart-block-4,
+    #grid-clone {
       width: 448px;
       display: block; } }
   @media (max-width: 479px) {
-    #chart-block-1, #chart-block-2, #chart-block-3, #chart-block-4, #grid-clone {
+    #chart-block-1,
+    #chart-block-2,
+    #chart-block-3,
+    #chart-block-4,
+    #grid-clone {
       width: 90%;
       margin: 0 auto;
       display: block; } }
-  #chart-block-1 h3, #chart-block-1 p, #chart-block-1 .select-wrapper, #chart-block-2 h3, #chart-block-2 p, #chart-block-2 .select-wrapper, #chart-block-3 h3, #chart-block-3 p, #chart-block-3 .select-wrapper, #chart-block-4 h3, #chart-block-4 p, #chart-block-4 .select-wrapper, #grid-clone h3, #grid-clone p, #grid-clone .select-wrapper {
+  #chart-block-1 h3,
+  #chart-block-1 p,
+  #chart-block-1 .select-wrapper,
+  #chart-block-2 h3,
+  #chart-block-2 p,
+  #chart-block-2 .select-wrapper,
+  #chart-block-3 h3,
+  #chart-block-3 p,
+  #chart-block-3 .select-wrapper,
+  #chart-block-4 h3,
+  #chart-block-4 p,
+  #chart-block-4 .select-wrapper,
+  #grid-clone h3,
+  #grid-clone p,
+  #grid-clone .select-wrapper {
     grid-column: 1/-1; }
-  #chart-block-1 .description, #chart-block-2 .description, #chart-block-3 .description, #chart-block-4 .description, #grid-clone .description {
+  #chart-block-1 .description,
+  #chart-block-2 .description,
+  #chart-block-3 .description,
+  #chart-block-4 .description,
+  #grid-clone .description {
     grid-row: 4/5;
     grid-column: 3/4;
     margin: 60px 0 0 10%;
     width: 90%; }
     @media (max-width: 1279px) {
-      #chart-block-1 .description, #chart-block-2 .description, #chart-block-3 .description, #chart-block-4 .description, #grid-clone .description {
+      #chart-block-1 .description,
+      #chart-block-2 .description,
+      #chart-block-3 .description,
+      #chart-block-4 .description,
+      #grid-clone .description {
         grid-column: 1/3;
         margin: 30px 0; } }
   @media (max-width: 992px) {
-    #chart-block-1 .col-1, #chart-block-1 #col-1-clone, #chart-block-2 .col-1, #chart-block-2 #col-1-clone, #chart-block-3 .col-1, #chart-block-3 #col-1-clone, #chart-block-4 .col-1, #chart-block-4 #col-1-clone, #grid-clone .col-1, #grid-clone #col-1-clone {
+    #chart-block-1 .col-1,
+    #chart-block-1 #col-1-clone,
+    #chart-block-2 .col-1,
+    #chart-block-2 #col-1-clone,
+    #chart-block-3 .col-1,
+    #chart-block-3 #col-1-clone,
+    #chart-block-4 .col-1,
+    #chart-block-4 #col-1-clone,
+    #grid-clone .col-1,
+    #grid-clone #col-1-clone {
       display: none; } }
-  #chart-block-1 .сol-2, #chart-block-1 #col-2-clone, #chart-block-2 .сol-2, #chart-block-2 #col-2-clone, #chart-block-3 .сol-2, #chart-block-3 #col-2-clone, #chart-block-4 .сol-2, #chart-block-4 #col-2-clone, #grid-clone .сol-2, #grid-clone #col-2-clone {
+  #chart-block-1 .сol-2,
+  #chart-block-1 #col-2-clone,
+  #chart-block-2 .сol-2,
+  #chart-block-2 #col-2-clone,
+  #chart-block-3 .сol-2,
+  #chart-block-3 #col-2-clone,
+  #chart-block-4 .сol-2,
+  #chart-block-4 #col-2-clone,
+  #grid-clone .сol-2,
+  #grid-clone #col-2-clone {
     grid-column: 2/3;
     max-width: 100%; }
-  #chart-block-1 .col-1-2, #chart-block-2 .col-1-2, #chart-block-3 .col-1-2, #chart-block-4 .col-1-2, #grid-clone .col-1-2 {
+  #chart-block-1 .col-1-2,
+  #chart-block-2 .col-1-2,
+  #chart-block-3 .col-1-2,
+  #chart-block-4 .col-1-2,
+  #grid-clone .col-1-2 {
     grid-column: 1/3; }
 
-#chart-block-1, #chart-block-2, #chart-block-3, #chart-block-4 {
+#chart-block-1,
+#chart-block-2,
+#chart-block-3,
+#chart-block-4 {
   margin: 50px auto; }
 
 #grid-clone {
   height: 0; }
 
-.y.axis > path.domain, .y-axis > path.domain {
+.y.axis > path.domain,
+.y-axis > path.domain {
   display: none; }
 
 .y-axis .tick line {
