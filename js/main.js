@@ -123,20 +123,29 @@ Promise.all([
     //показуємо і ховаємо випадаючі списки по кліку
     d3.selectAll(".model")
          .on("click", function(){
+             $('ul.dropdown').hide();
              let dropdown = d3.select(this.parentNode).select("ul.dropdown");
              dropdown.classed("hidden", !dropdown.classed("hidden"));
              dropdown.classed("opened", !dropdown.classed("opened"));
-             dropdown.style("display", "block");
+             if(dropdown.classed("hidden") === false) {
+                 dropdown.style("display", "block");
+             } else {
+                 dropdown.style("display", "none");
+             }
 
          });
 
+
+    /* ховаємо селекти по outside кліку */
     $('html').click(function() {
         $('ul.dropdown').hide();
+        d3.selectAll("ul.dropdown").classed("hidden", true);
     });
 
    $(".model-wrapper").click(function(e){
         e.stopPropagation();
     });
+    /*-----------------------------------------*/
 
 
     //функція, що оновлює ul li на зміну року і типу
