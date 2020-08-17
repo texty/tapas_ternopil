@@ -148,7 +148,6 @@ Promise.all([
                     d3.selectAll(".mainGroup > .bar").style("fill", transparentBlue).each(function(){
                         if(selected_value === this.id){
                             let xVal =  d3.select(this).attr("xVal");
-                            console.log(xVal);
                             brushX(+xVal);
                             d3.select(this).style("fill", saturatedBlue);
 
@@ -618,11 +617,9 @@ Promise.all([
              cx = d3.mouse(self)[1],
              x0 = cx - size / 2,
              x1 = cx + size / 2;
-        console.log(cx);
          var y1 = d3.max(range) + mini_yScale.bandwidth();
          var pos = x1 > y1 ? [y1 - size, y1] : x0 < 0 ? [0, size] : [x0, x1];
         //якщо є  brush-scroll, тільки тоді скачемо по селекту закладу
-        console.log(pos);
          gBrush.call(brush.move, pos);
     }//brushcenter end
 
@@ -634,11 +631,9 @@ Promise.all([
             cx = xval,
             x0 = cx - size / 2,
             x1 = cx + size / 2;
-        console.log(cx);
         var y1 = d3.max(range) + mini_yScale.bandwidth();
         var pos = x1 > y1 ? [y1 - size, y1] : x0 < 0 ? [0, size] : [x0, x1];
         //якщо є  brush-scroll, тільки тоді скачемо по селекту закладу
-        console.log(pos);
         gBrush.call(brush.move, pos);
     }//brushcenter end
 
