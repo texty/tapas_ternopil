@@ -145,6 +145,18 @@ Promise.all([
                 d3.select(parent).select(".recipient_model").select("p").attr("value", selected_value).text(selected_name.substring(20, 60) + "...");
                 d3.select(parent).select(".dropdown.recipient").classed("hidden", !d3.select(this).classed("hidden"));
                 if(parent === "#chart-block-1"){
+                    d3.selectAll(".mainGroup > .bar").style("fill", transparentBlue).each(function(){
+                        if(selected_value === this.id){
+                            let xVal =  d3.select(this).attr("xVal");
+                            console.log(xVal);
+                            brushX(+xVal);
+                            d3.select(this).style("fill", saturatedBlue);
+
+                        }
+
+                    });
+
+
                     draw_detail(calculate__2(input[0]));
                 } else if(parent === "#chart-block-2"){
                     draw_time((calculate__3(input[0])))
@@ -165,6 +177,7 @@ Promise.all([
         d3.select(parent).select(".model").select("p").attr("value", "").text("Обрати");
         d3.select(this.parentNode).classed("hidden", !d3.select(this).classed("hidden"));
         if(grandID === "chart-block-1"){
+            d3.selectAll(".mainGroup > .bar").style("fill", transparentBlue);
             draw_detail(calculate__2(input[0]));
         } else if(grandID === "chart-block-2"){
             draw_time((calculate__3(input[0])))
@@ -186,6 +199,7 @@ Promise.all([
         d3.select(parent).select(".model").select("p").attr("value", selected_value).text(selected_name);
         d3.select(parent).select(".dropdown").classed("hidden", !d3.select(this).classed("hidden"));
         if(grandID === "chart-block-1"){
+            d3.selectAll(".mainGroup > .bar").style("fill", transparentBlue);
             draw__1(calculate__1(input[0]));
             draw_detail(calculate__2(input[0]));
         } else if(grandID === "chart-block-2"){
@@ -604,11 +618,28 @@ Promise.all([
              cx = d3.mouse(self)[1],
              x0 = cx - size / 2,
              x1 = cx + size / 2;
+        console.log(cx);
          var y1 = d3.max(range) + mini_yScale.bandwidth();
          var pos = x1 > y1 ? [y1 - size, y1] : x0 < 0 ? [0, size] : [x0, x1];
         //якщо є  brush-scroll, тільки тоді скачемо по селекту закладу
-
+        console.log(pos);
          gBrush.call(brush.move, pos);
+    }//brushcenter end
+
+
+    function brushX(xval) {
+        var selection = d3.brushSelection(gBrush.node()),
+            size = selection[1] - selection[0],
+            range = mini_yScale.range(),
+            cx = xval,
+            x0 = cx - size / 2,
+            x1 = cx + size / 2;
+        console.log(cx);
+        var y1 = d3.max(range) + mini_yScale.bandwidth();
+        var pos = x1 > y1 ? [y1 - size, y1] : x0 < 0 ? [0, size] : [x0, x1];
+        //якщо є  brush-scroll, тільки тоді скачемо по селекту закладу
+        console.log(pos);
+        gBrush.call(brush.move, pos);
     }//brushcenter end
 
 
@@ -643,18 +674,25 @@ Promise.all([
              .data(df, function (d) { return d.key;  });
 
          bar
+             .attr("width", function (d) { return main_xScale(d.sum);   })
+             .transition().duration(500)
              .attr("id", function (d) { return d.school_id  })
-             .attr("xVal", function (d) { return main_yScale(d.school_id)  })
+             .attr("xVal", function (d) { return mini_yScale(d.school_id)  })
              .attr("y", function (d, i) {  return main_yScale(d.school_id);   })
              .attr("height", main_yScale.bandwidth() - 3)
-             .style("fill", transparentBlue)
+             // .style("fill", transparentBlue)
              .transition().duration(zero_duration)
-             .attr("width", function (d) { return main_xScale(d.sum);   });
+             .attr("data-tippy-content", function(d) {
+                 let name = recipient_options.find(function(k){
+                     return k.recipientID === d.school_id
+                 });
+                 return name.recipientName + ": " + d3.format(".2s")(d.sum) });
+
 
          bar.enter().append("rect")
              .attr("class", "bar tip")
              .attr("id", function (d) { return d.school_id  })
-             .attr("xVal", function (d) { return main_yScale(d.school_id)  })
+             .attr("xVal", function (d) { return mini_yScale(d.school_id)  })
              .style("fill", transparentBlue )
              .attr("data-tippy-content", function(d) {
                  let name = recipient_options.find(function(k){

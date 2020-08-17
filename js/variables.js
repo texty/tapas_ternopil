@@ -38,9 +38,9 @@ function getSelectedValues(parent, df){
     } else if (arr.length === 1) {
         if(arr[0].key === 'recipientID'){ update = false }
         filtered_arr = df.filter(function(d, i) {
-            if(d[arr[0].key] === arr[0].value){
-                console.log("teur");
-            }
+            // if(d[arr[0].key] === arr[0].value){
+            //     console.log("teur");
+            // }
             return d[arr[0].key] === arr[0].value;
         });
 
