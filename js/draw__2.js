@@ -73,10 +73,14 @@ function draw_detail(df){
         .attr("y", function (d, i) { return detail_yScale(d.category);  })
         .transition().duration(zero_duration)
         .attr("width", function (d) { return detail_xScale(d.sum);  })
-        .attr("data-tippy-content", function(d) { return d3.format(".2s")(d.sum)});
+        .attr("data-tippy-content", function(d) {
+            return d.category + ": " + d3.format(".2s")(d.sum)
+        });
 
     detail_bar.enter().append("rect")
-        .attr("data-tippy-content", function(d) { return d3.format(".2s")(d.sum)})
+        .attr("data-tippy-content", function(d) {
+            return d.category + ": " + d3.format(".2s")(d.sum)
+        })
         .attr("class", "detail tip")
         .attr("xVal", function (d) { return detail_yScale(d.category) })
         .attr("x", 0)

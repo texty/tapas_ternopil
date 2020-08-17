@@ -247,7 +247,7 @@ p, li {
   font-size: 12px;
   line-height: 20px;
   margin: 0 0 20px 0;
-  color: #000000;
+  color: #000;
 }
 
 
@@ -428,6 +428,10 @@ ul.dropdown {
 
   li:hover {
     background-color: #E7EEF3;
+  }
+
+  li.option {
+    color: grey;
   }
 }
 

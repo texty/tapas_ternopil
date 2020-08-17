@@ -190,7 +190,7 @@ p, li {
   font-size: 12px;
   line-height: 20px;
   margin: 0 0 20px 0;
-  color: #000000; }
+  color: #000; }
 
 .text {
   margin: 50px auto;
@@ -342,6 +342,8 @@ ul.dropdown {
     cursor: pointer; }
   ul.dropdown li:hover {
     background-color: #E7EEF3; }
+  ul.dropdown li.option {
+    color: grey; }
 
 .dropdown.year,
 .dropdown.type {

@@ -124,8 +124,20 @@ Promise.all([
     d3.selectAll(".model")
          .on("click", function(){
              let dropdown = d3.select(this.parentNode).select("ul.dropdown");
-             dropdown.classed("hidden", !dropdown.classed("hidden"))
+             dropdown.classed("hidden", !dropdown.classed("hidden"));
+             dropdown.classed("opened", !dropdown.classed("opened"));
+             dropdown.style("display", "block");
+
          });
+
+    $('html').click(function() {
+        $('ul.dropdown').hide();
+    });
+
+   $(".model-wrapper").click(function(e){
+        e.stopPropagation();
+    });
+
 
     //функція, що оновлює ul li на зміну року і типу
     function update_list_values(parent, data){
@@ -143,12 +155,16 @@ Promise.all([
                 var selected_value = d3.select(this).attr("id");
                 var selected_name = d3.select(this).text();
                 d3.select(parent).select(".recipient_model").select("p").attr("value", selected_value).text(selected_name.substring(20, 60) + "...");
+                d3.selectAll(".dropdown").style("display", "none");
                 d3.select(parent).select(".dropdown.recipient").classed("hidden", !d3.select(this).classed("hidden"));
                 if(parent === "#chart-block-1"){
                     d3.selectAll(".mainGroup > .bar").style("fill", transparentBlue).each(function(){
+                        let len = d3.selectAll(".mainGroup > .bar")._groups[0].length;
                         if(selected_value === this.id){
-                            let xVal =  d3.select(this).attr("xVal");
-                            brushX(+xVal);
+                            let xVal = d3.select(this).attr("xVal");
+                            if(len > 26) {
+                                brushX(+xVal);
+                            }
                             d3.select(this).style("fill", saturatedBlue);
 
                         }
@@ -167,16 +183,25 @@ Promise.all([
             });
     }
 
+
+
+
     
     //коли кліквємо на перший селект "Оберіть опцію..."
     d3.selectAll(".dropdown > li.small").on("click", function(){
         let grandparent = this.parentNode.parentNode.parentNode.parentNode;
         let parent = this.parentNode.parentNode;
         let grandID = d3.select(grandparent).attr("id");
-        d3.select(parent).select(".model").select("p").attr("value", "").text("Обрати");
+        d3.select(grandparent).select(".recipient_model").select("p").attr("value", "").text("Заклад");
+        d3.selectAll(".dropdown").style("display", "none");
+
+        var selected_value = d3.select(this).attr("value");
+        // console.log(selected_value);
+        d3.select(parent).select(".model").select("p").attr("value", "").text(selected_value);
         d3.select(this.parentNode).classed("hidden", !d3.select(this).classed("hidden"));
         if(grandID === "chart-block-1"){
             d3.selectAll(".mainGroup > .bar").style("fill", transparentBlue);
+            draw__1(calculate__1(input[0]));
             draw_detail(calculate__2(input[0]));
         } else if(grandID === "chart-block-2"){
             draw_time((calculate__3(input[0])))
@@ -187,16 +212,19 @@ Promise.all([
         }
     });
 
-    d3.selectAll(".year > li, .type > li").on("click", function(){ 
+
+    d3.selectAll(".year > li:not(.small), .type > li:not(.small)").on("click", function(){
         let grandparent = this.parentNode.parentNode.parentNode.parentNode;
         let parent = this.parentNode.parentNode;
         let grandID = d3.select(grandparent).attr("id");
-        d3.select(grandparent).select(".recipient_model").select("p").attr("value", "").text("Обрати");
+        d3.select(grandparent).select(".recipient_model").select("p").attr("value", "").text("Заклад");
+        d3.selectAll(".dropdown").style("display", "none");
+
         var selected_value = d3.select(this).attr("value");
         var selected_name = d3.select(this).text();
-        console.log(selected_value);
         d3.select(parent).select(".model").select("p").attr("value", selected_value).text(selected_name);
         d3.select(parent).select(".dropdown").classed("hidden", !d3.select(this).classed("hidden"));
+
         if(grandID === "chart-block-1"){
             d3.selectAll(".mainGroup > .bar").style("fill", transparentBlue);
             draw__1(calculate__1(input[0]));
@@ -670,7 +698,7 @@ Promise.all([
 
          bar
              .attr("width", function (d) { return main_xScale(d.sum);   })
-             .transition().duration(500)
+             // .transition().duration(500)
              .attr("id", function (d) { return d.school_id  })
              .attr("xVal", function (d) { return mini_yScale(d.school_id)  })
              .attr("y", function (d, i) {  return main_yScale(d.school_id);   })
@@ -681,7 +709,7 @@ Promise.all([
                  let name = recipient_options.find(function(k){
                      return k.recipientID === d.school_id
                  });
-                 return name.recipientName + ": " + d3.format(".2s")(d.sum) });
+                    return name.recipientName + ": " + d3.format(".2s")(d.sum) });
 
 
          bar.enter().append("rect")
@@ -691,9 +719,11 @@ Promise.all([
              .style("fill", transparentBlue )
              .attr("data-tippy-content", function(d) {
                  let name = recipient_options.find(function(k){
-                     return k.recipientID === d.school_id
+                     return +k.recipientID === +d.school_id
                  });
-                 return name.recipientName + ": " + d3.format(".2s")(d.sum) })
+                     return name.recipientName + ": " + d3.format(".2s")(d.sum);
+
+             })
              .on("click", function (d) {
                  let id = d3.select(this).attr("id");
 
