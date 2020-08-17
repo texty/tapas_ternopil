@@ -102,8 +102,8 @@ function draw_stacked(df){
         .attr("y", function (d) { return stacked_yScale(d.data.wide_cat); })
         .attr("x", 0 )
         .attr("height", stacked_yScale.bandwidth())
-        .attr("data-tippy-content", function(d) { return d3.format(".3s")(d.data.plans)})
         .transition().duration(transition_time)
+        .attr("data-tippy-content", function(d) { return d3.format(".3s")(d.data.plans)})
         .attr("width", function (d) {  return stacked_xScale(d.data.plans) });
 
 
