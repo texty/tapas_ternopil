@@ -71,7 +71,7 @@ function draw_scatter(df){
         .call(d3.axisLeft(scatter_yScale)
             .tickSize(0)
             .tickFormat(function(d) {
-                return d.substring(0, 15) + "...";
+                return d.substring(0, 12) + "...";
             })
             .tickSizeOuter(0)
         );
@@ -120,7 +120,9 @@ function draw_scatter(df){
         )
         .attr("cy", function (k) { return scatter_yScale(k.category);  })
         .attr("r", function(d){ return scatter_rScale(d.sum)})
-        .attr("data-tippy-content", function(d) { return d3.format(".2s")(d.sum)});
+        .attr("data-tippy-content", function(d) {
+            return "<b>"+d.category + '</b><br>' + d.day + "/" + d.month + ": " + d3.format(".2s")(d.sum)
+        });
 
 
     circles.enter().append("circle")
@@ -134,18 +136,21 @@ function draw_scatter(df){
         .attr("cy", function (k) { return scatter_yScale(k.category);  })
         //.attr("r", 3)
         .attr("r", function(d){ return scatter_rScale(d.sum)})
-        .attr("data-tippy-content", function(d) { return d3.format(".2s")(d.sum)});
+        .attr("data-tippy-content", function(d) {
+              return "<b>"+d.category + '</b><br>' + d.day + "/" + d.month + ": " + d3.format(".2s")(d.sum)
+        });
 
 
     circles.exit().remove();
 
-    tippy('.tip', {
-        content: 'Global content',
-        duration: 0,
-        onShow(tip) {
-            tip.setContent(tip.reference.getAttribute('data-tippy-content'))
-        }
-
-    });
+    // tippy('.tip', {
+    //     allowHTML: true,
+    //     content: 'Global content',
+    //     duration: 0,
+    //     onShow(tip) {
+    //         tip.setContent(tip.reference.getAttribute('data-tippy-content'))
+    //     }
+    //
+    // });
 
 }

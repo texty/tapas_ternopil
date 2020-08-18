@@ -5,6 +5,8 @@ const time_margin = {top: 40, right: 10, bottom: 30, left: 50},
     time_width = d3.select("#chart_3").node().getBoundingClientRect().width - time_margin.left - time_margin.right,
     time_height = 500 - time_margin.top - time_margin.bottom;
 
+const real_tips = ['1','2','3','4','5','6','7','8','9','10','11','12'];
+const desire_tips = ["січень", "лютий", "березень", "квітень", "травень", "червень", "липень", "серпень", "вересень", "жовтень", "листопад","грудень"];
 
 const svg_3 = d3.select("#chart_3")
     .attr("class", "svgWrapper")
@@ -80,7 +82,10 @@ function draw_time(df){
         .attr("height", function (d) { return new_height - time_yScale(d.sum)})
         .attr("rx", time_xScale.bandwidth() / 2 )
         .attr("ry", time_xScale.bandwidth() / 2 )
-        .attr("data-tippy-content", function(d) { return d3.format(".2s")(d.sum)});
+        .attr("data-tippy-content", function(d) {
+            let ind = real_tips.indexOf(d.month);
+            return desire_tips[ind] + ": " + d3.format(".2s")(d.sum)
+        });
 
     time_bar.enter().append("rect")
         .attr("class", "detail tip")
@@ -92,18 +97,22 @@ function draw_time(df){
         .attr("x", function (d, i) { return time_xScale(d.month);  })
         .attr("width",  time_xScale.bandwidth() )
         .attr("height", function (d) { return new_height - time_yScale(d.sum)})
-        .attr("data-tippy-content", function(d) { return d3.format(".2s")(d.sum)});
+        .attr("data-tippy-content", function(d) {
+            let ind = real_tips.indexOf(d.month);
+            return desire_tips[ind] + ": " + d3.format(".2s")(d.sum)
+        });
 
 
     time_bar.exit().remove();
 
-    tippy('.tip', {
-        content: 'Global content',
-        duration: 0,
-        onShow(tip) {
-            tip.setContent(tip.reference.getAttribute('data-tippy-content'))
-        }
-
-    });
+    // tippy('.tip', {
+    //     allowHTML: true,
+    //     content: 'Global content',
+    //     duration: 0,
+    //     onShow(tip) {
+    //         tip.setContent(tip.reference.getAttribute('data-tippy-content'))
+    //     }
+    //
+    // });
 
 }

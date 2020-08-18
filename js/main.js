@@ -163,7 +163,7 @@ Promise.all([
             .on("click", function(){
                 var selected_value = d3.select(this).attr("id");
                 var selected_name = d3.select(this).text();
-                d3.select(parent).select(".recipient_model").select("p").attr("value", selected_value).text(selected_name.substring(20, 60) + "...");
+                d3.select(parent).select(".recipient_model").select("p").attr("value", selected_value).text(selected_name.substring(0, 30) + "...");
                 d3.selectAll(".dropdown").style("display", "none");
                 d3.select(parent).select(".dropdown.recipient").classed("hidden", !d3.select(this).classed("hidden"));
                 if(parent === "#chart-block-1"){
@@ -754,21 +754,24 @@ Promise.all([
          bar.exit()
              .remove();
 
-         tippy('.tip', {
-             content: 'Global content',
-             duration: 0,
-             onShow(tip) {
-                 tip.setContent(tip.reference.getAttribute('data-tippy-content'))
-             }
-
-         });
-
 
 
      } //update end
 
 
     draw__1(calculate__1(input[0]));
+
+
+    tippy('.tip', {
+        allowHTML: true,
+        content: 'Global content',
+        duration: 0,
+        onShow(tip) {
+            tip.setContent(tip.reference.getAttribute('data-tippy-content'))
+        }
+
+    });
+
 
 });
 

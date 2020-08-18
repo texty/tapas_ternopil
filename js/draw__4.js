@@ -144,14 +144,15 @@ function draw_stacked(df){
         .attr("width", function (d) { return stacked_xScale(d[1]) - stacked_xScale(d[0]) });
 
 
-    tippy('.tip', {
-        content: 'Global content',
-        duration: 0,
-        onShow(tip) {
-            tip.setContent(tip.reference.getAttribute('data-tippy-content'))
-        }
-
-    });
+    // tippy('.tip', {
+    //     allowHTML: true,
+    //     content: 'Global content',
+    //     duration: 0,
+    //     onShow(tip) {
+    //         tip.setContent(tip.reference.getAttribute('data-tippy-content'))
+    //     }
+    //
+    // });
 
 
 }
