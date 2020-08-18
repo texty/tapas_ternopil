@@ -44,6 +44,10 @@ var stacked_color = d3
 
 function draw_stacked(df){
 
+    const real_groups = ["budget", "money", "products"];
+    const desired_groups = ["Бюджетні кошти", "Грошові внески", "Негрошові внески"];
+
+
     var new_width = d3.select("#chart-block-3").select(".col-1-2").node().getBoundingClientRect().width - stacked_margin.left - stacked_margin.right;
     var new_height = df.y_domain.length * 17;
 
@@ -97,13 +101,17 @@ function draw_stacked(df){
         .attr("height", stacked_yScale.bandwidth())
         .attr("rx", stacked_yScale.bandwidth() / 2)
         .attr("ry", stacked_yScale.bandwidth() /2 )
-        .attr("data-tippy-content", function(d) { return d3.format(".3s")(d.data.plans)})
+        .attr("data-tippy-content", function(d) {
+            return "Заплановані закупівлі: " + d3.format(".3s")(d.data.plans
+            )})
         .merge(plans)
         .attr("y", function (d) { return stacked_yScale(d.data.wide_cat); })
         .attr("x", 0 )
         .attr("height", stacked_yScale.bandwidth())
         .transition().duration(transition_time)
-        .attr("data-tippy-content", function(d) { return d3.format(".3s")(d.data.plans)})
+        .attr("data-tippy-content", function(d) {
+            return "Заплановані закупівлі: " + d3.format(".3s")(d.data.plans
+                )})
         .attr("width", function (d) {  return stacked_xScale(d.data.plans) });
 
 
@@ -134,13 +142,21 @@ function draw_stacked(df){
         .attr("height", stacked_yScale.bandwidth())
         .attr("rx", stacked_yScale.bandwidth() / 2)
         .attr("ry", stacked_yScale.bandwidth() /2 )
-        .attr("data-tippy-content", function(d) { return d3.format(".2s")(d[1])})
+        .attr("data-tippy-content", function(d) {
+            let groupName = d3.select(this.parentNode).attr("group");
+            let ind = real_groups.indexOf(groupName);
+            return desired_groups[ind] + ": " + d3.format(".2s")(d[1]);
+        })
         .merge(bars)
         .attr("height", stacked_yScale.bandwidth())
         .attr("y", function (d) { return stacked_yScale(d.data.wide_cat); })
         .attr("x", function (d) { return stacked_xScale(d[0]); })
         .transition().duration(transition_time)
-        .attr("data-tippy-content", function(d) { return d3.format(".2s")(d[1])})
+        .attr("data-tippy-content", function(d) {
+            let groupName = d3.select(this.parentNode).attr("group");
+            let ind = real_groups.indexOf(groupName);
+            return desired_groups[ind] + ": " + d3.format(".2s")(d[1]);
+        })
         .attr("width", function (d) { return stacked_xScale(d[1]) - stacked_xScale(d[0]) });
 
 
