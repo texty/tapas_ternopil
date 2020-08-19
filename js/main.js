@@ -166,12 +166,20 @@ Promise.all([
             .attr("id", function(d){ return d.recipientID })
             .text(function(d){ return d.recipientName })
             .on("click", function(){
+                //прибрали веселку
                 d3.selectAll(".dropdown-line").classed("dropdown-rainbow", false).classed("dropdown-passive", true);
+
+                //get clicked value
                 var selected_value = d3.select(this).attr("id");
                 var selected_name = d3.select(this).text();
                 d3.select(parent).select(".recipient_model").select("p").attr("value", selected_value).text(selected_name.substring(0, 30) + "...");
+
+                //hide dropdown
                 d3.selectAll(".dropdown").style("display", "none");
                 d3.select(parent).select(".dropdown.recipient").classed("hidden", !d3.select(this).classed("hidden"));
+
+
+                //відмальовуємо графік в задежності від того, в якому контейнері клікнули
                 if(parent === "#chart-block-1"){
                     d3.selectAll(".mainGroup > .bar").style("fill", transparentBlue).each(function(){
                         let len = d3.selectAll(".mainGroup > .bar")._groups[0].length;
@@ -195,6 +203,16 @@ Promise.all([
                 } else if(parent === "#chart-block-4"){
                     draw_scatter(calculate__5(input[0]));
                 }
+
+                tippy('.tip', {
+                    allowHTML: true,
+                    content: 'Global content',
+                    duration: 0,
+                    onShow(tip) {
+                        tip.setContent(tip.reference.getAttribute('data-tippy-content'))
+                    }
+
+                });
             });
     }
 
@@ -202,34 +220,47 @@ Promise.all([
 
 
     
-    //коли кліквємо на перший селект "Оберіть опцію..."
-    d3.selectAll(".dropdown > li.small").on("click", function(){
-        d3.selectAll(".dropdown-line").classed("dropdown-rainbow", false).classed("dropdown-passive", true);
-        let grandparent = this.parentNode.parentNode.parentNode.parentNode;
-        let parent = this.parentNode.parentNode;
-        let grandID = d3.select(grandparent).attr("id");
-        d3.select(grandparent).select(".recipient_model").select("p").attr("value", "").text("Заклад");
-        d3.selectAll(".dropdown").style("display", "none");
+    // //коли кліквємо на перший селект "Оберіть опцію..."
+    // d3.selectAll(".dropdown > li.small").on("click", function(){
+    //     d3.selectAll(".dropdown-line").classed("dropdown-rainbow", false).classed("dropdown-passive", true);
+    //     let grandparent = this.parentNode.parentNode.parentNode.parentNode;
+    //     let parent = this.parentNode.parentNode;
+    //     let grandID = d3.select(grandparent).attr("id");
+    //     d3.select(grandparent).select(".recipient_model").select("p").attr("value", "").text("Заклад");
+    //     d3.selectAll(".dropdown").style("display", "none");
+    //
+    //     var selected_value = d3.select(this).attr("value");
+    //
+    //     d3.select(parent).select(".model").select("p").attr("value", "").text(selected_value);
+    //
+    //     d3.select(this.parentNode).classed("hidden", !d3.select(this).classed("hidden"));
+    //     if(grandID === "chart-block-1"){
+    //         d3.selectAll(".mainGroup > .bar").style("fill", transparentBlue);
+    //         draw__1(calculate__1(input[0]));
+    //         draw_detail(calculate__2(input[0]));
+    //     } else if(grandID === "chart-block-2"){
+    //         draw_time((calculate__3(input[0])))
+    //     } else if(grandID === "chart-block-3"){
+    //         draw_stacked((calculate__4(input[1])))
+    //     } else if(grandID === "chart-block-4"){
+    //         draw_scatter(calculate__5(input[0]));
+    //
+    //         tippy('.tip', {
+    //             allowHTML: true,
+    //             content: 'Global content',
+    //             duration: 0,
+    //             onShow(tip) {
+    //                 tip.setContent(tip.reference.getAttribute('data-tippy-content'))
+    //             }
+    //
+    //         });
+    //     }
+    // });
 
-        var selected_value = d3.select(this).attr("value");
-        // console.log(selected_value);
-        d3.select(parent).select(".model").select("p").attr("value", "").text(selected_value);
-        d3.select(this.parentNode).classed("hidden", !d3.select(this).classed("hidden"));
-        if(grandID === "chart-block-1"){
-            d3.selectAll(".mainGroup > .bar").style("fill", transparentBlue);
-            draw__1(calculate__1(input[0]));
-            draw_detail(calculate__2(input[0]));
-        } else if(grandID === "chart-block-2"){
-            draw_time((calculate__3(input[0])))
-        } else if(grandID === "chart-block-3"){
-            draw_stacked((calculate__4(input[1])))
-        } else if(grandID === "chart-block-4"){
-            draw_scatter(calculate__5(input[0]));
-        }
-    });
+    //:not(.small) :not(.small)
 
-
-    d3.selectAll(".year > li:not(.small), .type > li:not(.small)").on("click", function(){
+    d3.selectAll(".year > li, .type > li, recipient > li.small").on("click", function(){
+        let ifSmall = d3.select(this).classed("small");
         d3.selectAll(".dropdown-line").classed("dropdown-rainbow", false).classed("dropdown-passive", true);
         let grandparent = this.parentNode.parentNode.parentNode.parentNode;
         let parent = this.parentNode.parentNode;
@@ -239,7 +270,9 @@ Promise.all([
 
         var selected_value = d3.select(this).attr("value");
         var selected_name = d3.select(this).text();
-        d3.select(parent).select(".model").select("p").attr("value", selected_value).text(selected_name);
+
+        d3.select(parent).select(".model").select("p").attr("value", ifSmall ===  true ? "" : selected_value).text(selected_name);
+
         d3.select(parent).select(".dropdown").classed("hidden", !d3.select(this).classed("hidden"));
 
         if(grandID === "chart-block-1"){
@@ -253,6 +286,16 @@ Promise.all([
         } else if(grandID === "chart-block-4"){
             draw_scatter(calculate__5(input[0]));
         }
+
+        tippy('.tip', {
+            allowHTML: true,
+            content: 'Global content',
+            duration: 0,
+            onShow(tip) {
+                tip.setContent(tip.reference.getAttribute('data-tippy-content'))
+            }
+
+        });
     });
 
 
@@ -770,7 +813,6 @@ Promise.all([
 
 
     draw__1(calculate__1(input[0]));
-
 
     tippy('.tip', {
         allowHTML: true,
