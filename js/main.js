@@ -124,6 +124,10 @@ Promise.all([
     d3.selectAll(".model")
          .on("click", function(){
              $('ul.dropdown').hide();
+             let input = d3.select(this.parentNode).select(".dropdown-line");
+             input.classed("dropdown-rainbow", !input.classed("dropdown-rainbow"));
+             input.classed("dropdown-passive", !input.classed("dropdown-passive"));
+
              let dropdown = d3.select(this.parentNode).select("ul.dropdown");
              dropdown.classed("hidden", !dropdown.classed("hidden"));
              dropdown.classed("opened", !dropdown.classed("opened"));
@@ -140,6 +144,7 @@ Promise.all([
     $('html').click(function() {
         $('ul.dropdown').hide();
         d3.selectAll("ul.dropdown").classed("hidden", true);
+        d3.selectAll(".dropdown-line").classed("dropdown-rainbow", false).classed("dropdown-passive", true)
     });
 
    $(".model-wrapper").click(function(e){
@@ -161,6 +166,7 @@ Promise.all([
             .attr("id", function(d){ return d.recipientID })
             .text(function(d){ return d.recipientName })
             .on("click", function(){
+                d3.selectAll(".dropdown-line").classed("dropdown-rainbow", false).classed("dropdown-passive", true);
                 var selected_value = d3.select(this).attr("id");
                 var selected_name = d3.select(this).text();
                 d3.select(parent).select(".recipient_model").select("p").attr("value", selected_value).text(selected_name.substring(0, 30) + "...");
@@ -198,6 +204,7 @@ Promise.all([
     
     //коли кліквємо на перший селект "Оберіть опцію..."
     d3.selectAll(".dropdown > li.small").on("click", function(){
+        d3.selectAll(".dropdown-line").classed("dropdown-rainbow", false).classed("dropdown-passive", true);
         let grandparent = this.parentNode.parentNode.parentNode.parentNode;
         let parent = this.parentNode.parentNode;
         let grandID = d3.select(grandparent).attr("id");
@@ -223,6 +230,7 @@ Promise.all([
 
 
     d3.selectAll(".year > li:not(.small), .type > li:not(.small)").on("click", function(){
+        d3.selectAll(".dropdown-line").classed("dropdown-rainbow", false).classed("dropdown-passive", true);
         let grandparent = this.parentNode.parentNode.parentNode.parentNode;
         let parent = this.parentNode.parentNode;
         let grandID = d3.select(grandparent).attr("id");
@@ -397,12 +405,13 @@ Promise.all([
 
                 //загальна сума бюджету, або к-ть голосів по платформі і капіталу
                 var plans = filtered.reduce(function(a, b) {  return a + +b.plans; }, 0);
-                var budget = filtered.reduce(function(a, b) { return a + +b.budget; }, 0);
                 var money = filtered.reduce(function(a, b) { return a + +b.money;  }, 0);
+                var budget = filtered.reduce(function(a, b) { return a + +b.budget; }, 0) ;
                 var products = filtered.reduce(function(a, b) { return a + +b.products;  }, 0);
                 var total = budget + money + products;
 
                 //створюємо частину майбутнього рядку: к-ть голосів або бюджет по поточному капіталу
+
                 var ob = {
                     wide_cat: cvp,
                     plans: plans,
@@ -414,6 +423,7 @@ Promise.all([
 
                 //пушиму значення у  новий df
                 gathered.push(ob);
+            console.log(ob);
             });
         
         gathered = gathered.sort(function(a, b) { return a.total - b.total; });

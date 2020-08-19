@@ -17,10 +17,10 @@
 </head>
 <body>
 <header>
+    <div class="image-container">
+        <img src="img/cover.png"/>
+    </div>
     <div class="content">
-        <div class="image-container">
-            <img src="img/cover.png"/>
-        </div>
         <div class="title-wrapper">
             <div class="title">
                 <h1>Донейт на апгрейд</h1>
@@ -65,8 +65,8 @@
         перевірити, на що були використані благодійні внески</p>
     </div>
 
-<div class="incut">
-    <div class="text">
+<div class="text">
+    <div class="incut">
         <h3>Завдяки різним факторам по всій Україні примусові благодійні внески у школах і садках зменшились із 70% у 2017 році до 55% у 2020-му</h3>
     </div>
 </div>
@@ -163,7 +163,7 @@
                     <div class="polygon"></div>
                     <!--<option value="" selected>Оберіть опцію зі списку</option>-->
                 </div>
-                <div class="rainbow" style=""></div>
+                <div class="dropdown-passive dropdown-line" style=""></div>
                 <ul class="dropdown year hidden">
                     <li class="option small" value="Рік">Скинути</li>
                 </ul>
@@ -176,7 +176,7 @@
                     <div class="polygon"></div>
                     <!--<option value="" selected>Оберіть опцію зі списку</option>-->
                 </div>
-                <div class="rainbow" style=""></div>
+                <div class="dropdown-passive dropdown-line" style=""></div>
                 <ul class="dropdown type hidden">
                     <li class="option small" value="Тип">Скинути</li>
                 </ul>
@@ -187,7 +187,7 @@
                     <p>Заклад</p>
                     <div class="polygon"></div>
                 </div>
-                <div class="rainbow" style=""></div>
+                <div class="dropdown-passive dropdown-line" style=""></div>
 
                 <ul class="dropdown recipient hidden">
                     <li class="option small" value="Заклад">Скинути</li>
@@ -253,7 +253,7 @@
                         <div class="polygon"></div>
                         <!--<option value="" selected>Оберіть опцію зі списку</option>-->
                     </div>
-                    <div class="rainbow" style=""></div>
+                    <div class="dropdown-passive dropdown-line" style=""></div>
                     <ul class="dropdown year hidden">
                         <li class="option small" value="Рік">Скинути</li>
                     </ul>
@@ -265,7 +265,7 @@
                         <div class="polygon"></div>
                         <!--<option value="" selected>Оберіть опцію зі списку</option>-->
                     </div>
-                    <div class="rainbow" style=""></div>
+                    <div class="dropdown-passive dropdown-line" style=""></div>
                     <ul class="dropdown type hidden">
                         <li class="option small" value="Тип">
                             Обрати
@@ -278,7 +278,7 @@
                         <p>Заклад</p>
                         <div class="polygon"></div>
                     </div>
-                    <div class="rainbow" style=""></div>
+                    <div class="dropdown-passive dropdown-line" style=""></div>
 
                     <ul class="dropdown recipient hidden">
                         <li class="option small" value="Заклад">Скинути</li>
@@ -324,7 +324,7 @@
                         <div class="polygon"></div>
                         <!--<option value="" selected>Оберіть опцію зі списку</option>-->
                     </div>
-                    <div class="rainbow" style=""></div>
+                    <div class="dropdown-passive dropdown-line" style=""></div>
                     <ul class="dropdown year hidden">
                         <li class="option small" value="Рік">Скинути</li>
                     </ul>
@@ -339,7 +339,7 @@
                         <p>Заклад</p>
                         <div class="polygon"></div>
                     </div>
-                    <div class="rainbow" style=""></div>
+                    <div class="dropdown-passive dropdown-line" style=""></div>
 
                     <ul class="dropdown recipient hidden">
                         <li class="option small" value="Заклад">Скинути</li>
@@ -361,9 +361,9 @@
                     </p>
                     <p class="small"><span class="stacked-legend" style="background-color: #007EFF; color: white;">Бюджетні кошти</span>
                     </p>
-                    <p class="small"><span class="stacked-legend" style="background-color: #AA2B8E66">Негрошові внески</span>
+                    <p class="small"><span class="stacked-legend" style="background-color: #AA2B8E66">Грошові внески</span>
                     </p>
-                    <p class="small"><span class="stacked-legend" style="background-color: #007EFF33">Грошові внески</span>
+                    <p class="small"><span class="stacked-legend" style="background-color: #007EFF33">Негрошові внески</span>
                     </p>
 
                 </div>
@@ -414,7 +414,7 @@
                         <div class="polygon"></div>
                         <!--<option value="" selected>Оберіть опцію зі списку</option>-->
                     </div>
-                    <div class="rainbow" style=""></div>
+                    <div class="dropdown-passive dropdown-line" style=""></div>
                     <ul class="dropdown year hidden">
                         <li class="option small" value="Рік">Скинути</li>
                     </ul>
@@ -426,7 +426,7 @@
                         <div class="polygon"></div>
                         <!--<option value="" selected>Оберіть опцію зі списку</option>-->
                     </div>
-                    <div class="rainbow" style=""></div>
+                    <div class="dropdown-passive dropdown-line" style=""></div>
                     <ul class="dropdown type hidden">
                         <li class="option small" value="Тип">
                             Скинути
@@ -439,7 +439,7 @@
                         <p>Заклад</p>
                         <div class="polygon"></div>
                     </div>
-                    <div class="rainbow" style=""></div>
+                    <div class="dropdown-passive dropdown-line" style=""></div>
 
                     <ul class="dropdown recipient hidden">
                         <li class="option small" value="Заклад">Скинути</li>
@@ -512,17 +512,13 @@
     додатково 1345 гривень витратив на неї з благодійних внесків. Та ж стратегія Центру
     і з іншими категоріями: продуктами харчування, медичним обладнанням, меблями.
     Частину із запланованого покриваємо бюджетними коштами, частину - благодійністю.</p>
-</div>
 
-<div class="incut">
-    <div class="text">
+    <div class="incut">
         <h4>Ще приклад поєднання закупівель та благодійних внесків ЗОШ No28:
             Навчальний заклад запланував закупити меблів на 643 тис. гривень, а фактично витратив 518 тис, бо додатково
             отримав благодійний внесок від Тернопільської обласної державної адміністрації</h4>
     </div>
-</div>
 
-<div class="text">
     <p>Це інший цікавий кейс. Управління освіти Тернопільської міської ради та обласної
         державної адміністрації передавали школам комп’ютерну техніку та меблі, а школи
         обліковували їх як благодійну допомогу. За 2019 рік Управління освіти і науки міської
@@ -549,8 +545,46 @@
         та дизайну, ще на 16 тис гривень - друкованої продукції, а ТОВ “Хенкель Баутехнік
         (Україна)” на 18 тис гривень - будівельних матеріалів Центру професійно-технічної
         освіти.</p>
-
 </div>
+
+<footer>
+
+    <div class="content"> <!-- класс з грідом для контенту-->
+
+        <!-- створено Текстами -->
+        <div class="created-by-texty">
+            <p>Створено ТЕКСТами</p>
+            <img style="width: 180px" src="img/white_logo.svg">
+        </div>
+
+
+        <!-- Поширити -->
+        <div class="socio-wrapper">
+            <p>Поширити:</p>
+
+            <div class="socio-icons-box">
+
+                <!--fb-->
+                <a href="https://www.facebook.com/sharer/sharer.php?u=" target="_blank" class="share-btn">
+                    <div class="icon-wrapper">
+                        <img class="icon-box" src="img/Vector.png"/>
+                        <img id="fb" style="" src="img/fb.png"/>
+                    </div>
+                </a>
+
+                <!--tw -->
+                <a href="https://twitter.com/intent/tweet?text=" target="_blank" class="share-btn">
+                    <div class="icon-wrapper">
+                        <img class="icon-box" src="img/Vector.png"/>
+                        <img id="tw" style="" src="img/tw.png"/>
+                    </div>
+                </a>
+
+            </div>
+        </div>
+
+    </div>
+</footer>
 
 
 
