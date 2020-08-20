@@ -145,7 +145,7 @@ function draw_stacked(df){
         .attr("data-tippy-content", function(d) {
             let groupName = d3.select(this.parentNode).attr("group");
             let ind = real_groups.indexOf(groupName);
-            return desired_groups[ind] + ": " + d3.format(".2s")(d[1]);
+            return desired_groups[ind] + ": " + d3.format(".2s")(d[1] - d[0]);
         })
         .merge(bars)
         .attr("height", stacked_yScale.bandwidth())
@@ -155,7 +155,7 @@ function draw_stacked(df){
         .attr("data-tippy-content", function(d) {
             let groupName = d3.select(this.parentNode).attr("group");
             let ind = real_groups.indexOf(groupName);
-            return desired_groups[ind] + ": " + d3.format(".2s")(d[1]);
+            return desired_groups[ind] + ": " + d3.format(".2s")(d[1] - d[0]);
         })
         .attr("width", function (d) { return stacked_xScale(d[1]) - stacked_xScale(d[0]) });
 
