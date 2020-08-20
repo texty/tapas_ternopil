@@ -466,7 +466,6 @@ Promise.all([
 
                 //пушиму значення у  новий df
                 gathered.push(ob);
-            console.log(ob);
             });
         
         gathered = gathered.sort(function(a, b) { return a.total - b.total; });
@@ -815,6 +814,7 @@ Promise.all([
     draw__1(calculate__1(input[0]));
 
     tippy('.tip', {
+        // trigger: 'click',
         allowHTML: true,
         content: 'Global content',
         duration: 0,
