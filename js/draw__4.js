@@ -84,43 +84,6 @@ function draw_stacked(df){
             .tickFormat(d3.format(".2s"))
         );
 
-    var plans = svg_4.selectAll(".plans")
-        .data(df.layers[0]);
-
-    plans.exit().remove();
-
-    plans.enter()
-        .append("rect")
-        .attr("class", "plans tip")
-        .attr("stroke", "#AA2B8E")
-        .attr("fill", "transparent")
-        //.style("opacity", "0.5")
-        .attr("width", function (d) {  return stacked_xScale(d.data.plans) })
-        .attr("y", function (d) {  return stacked_yScale(d.data.wide_cat); })
-        .attr("x", 0 )
-        .attr("height", stacked_yScale.bandwidth())
-        .attr("rx", stacked_yScale.bandwidth() / 2)
-        .attr("ry", stacked_yScale.bandwidth() /2 )
-        .attr("data-tippy-content", function(d) {
-            return "<div style='margin-bottom: 10px; font-weight: bold'>" + d.data.wide_cat + ": </div>"+
-                "Заплановані закупівлі: " + d3.format(".2s")(d.data.plans) + "<br>"+
-                "Бюджетні кошти: " + d3.format(".2s")(d.data.budget) + "<br>"+
-                "Грошові внески: " + d3.format(".2s")(d.data.money) + "<br>"+
-                "Негрошові внески: " + d3.format(".2s")(d.data.products) + "<br>";
-            })
-        .merge(plans)
-        .attr("y", function (d) { return stacked_yScale(d.data.wide_cat); })
-        .attr("x", 0 )
-        .attr("height", stacked_yScale.bandwidth())
-        .transition().duration(transition_time)
-        .attr("data-tippy-content", function(d) {
-            return "<div style='margin-bottom: 10px; font-weight: bold;'>" + d.data.wide_cat + ": </div>"+
-                "Заплановані закупівлі: " + d3.format(".2s")(d.data.plans) + "<br>"+
-                "Бюджетні кошти: " + d3.format(".2s")(d.data.budget) + "<br>"+
-                "Грошові внески: " + d3.format(".2s")(d.data.money) + "<br>"+
-                "Негрошові внески: " + d3.format(".2s")(d.data.products) + "<br>";
-        })
-        .attr("width", function (d) {  return stacked_xScale(d.data.plans) });
 
 
     var group = svg_4.selectAll("g.layer")
@@ -180,6 +143,47 @@ function draw_stacked(df){
         .attr("width", function (d) { return stacked_xScale(d[1]) - stacked_xScale(d[0]) })
 
     ;
+
+
+
+    var plans = svg_4.selectAll(".plans")
+        .data(df.layers[0]);
+
+    plans.exit().remove();
+
+    plans.enter()
+        .append("rect")
+        .attr("class", "plans tip")
+        .attr("stroke", "#AA2B8E")
+        .attr("fill", "transparent")
+        //.style("opacity", "0.5")
+        .attr("width", function (d) {  return stacked_xScale(d.data.plans) })
+        .attr("y", function (d) {  return stacked_yScale(d.data.wide_cat); })
+        .attr("x", 0 )
+        .attr("height", stacked_yScale.bandwidth())
+        .attr("rx", stacked_yScale.bandwidth() / 2)
+        .attr("ry", stacked_yScale.bandwidth() /2 )
+        .attr("data-tippy-content", function(d) {
+            return "<div style='margin-bottom: 10px; font-weight: bold'>" + d.data.wide_cat + ": </div>"+
+                "Заплановані закупівлі: " + d3.format(".2s")(d.data.plans) + "<br>"+
+                "Бюджетні кошти: " + d3.format(".2s")(d.data.budget) + "<br>"+
+                "Грошові внески: " + d3.format(".2s")(d.data.money) + "<br>"+
+                "Негрошові внески: " + d3.format(".2s")(d.data.products) + "<br>";
+        })
+        .merge(plans)
+        .attr("y", function (d) { return stacked_yScale(d.data.wide_cat); })
+        .attr("x", 0 )
+        .attr("height", stacked_yScale.bandwidth())
+        .transition().duration(transition_time/2)
+        .attr("data-tippy-content", function(d) {
+            return "<div style='margin-bottom: 10px; font-weight: bold;'>" + d.data.wide_cat + ": </div>"+
+                "Заплановані закупівлі: " + d3.format(".2s")(d.data.plans) + "<br>"+
+                "Бюджетні кошти: " + d3.format(".2s")(d.data.budget) + "<br>"+
+                "Грошові внески: " + d3.format(".2s")(d.data.money) + "<br>"+
+                "Негрошові внески: " + d3.format(".2s")(d.data.products) + "<br>";
+        })
+        .attr("width", function (d) {  return stacked_xScale(d.data.plans) });
+
 
 
     // tippy('.tip', {
