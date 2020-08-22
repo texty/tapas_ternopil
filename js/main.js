@@ -259,8 +259,9 @@ Promise.all([
 
     //:not(.small) :not(.small)
 
-    d3.selectAll(".year > li, .type > li, recipient > li.small").on("click", function(){
+    d3.selectAll(".year > li, .type > li, .recipient > li.small").on("click", function(){
         let ifSmall = d3.select(this).classed("small");
+        console.log(ifSmall);
         d3.selectAll(".dropdown-line").classed("dropdown-rainbow", false).classed("dropdown-passive", true);
         let grandparent = this.parentNode.parentNode.parentNode.parentNode;
         let parent = this.parentNode.parentNode;
@@ -271,7 +272,9 @@ Promise.all([
         var selected_value = d3.select(this).attr("value");
         var selected_name = d3.select(this).text();
 
-        d3.select(parent).select(".model").select("p").attr("value", ifSmall ===  true ? "" : selected_value).text(selected_name);
+        d3.select(parent).select(".model").select("p")
+            .attr("value", ifSmall ===  true ? "" : selected_value)
+            .text(ifSmall ===  true ? selected_value : selected_name);
 
         d3.select(parent).select(".dropdown").classed("hidden", !d3.select(this).classed("hidden"));
 
