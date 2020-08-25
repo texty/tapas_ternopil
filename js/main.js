@@ -341,9 +341,13 @@ Promise.all([
             })
                 .forEach(function (d) {
                     options.push(
-                        {"recipientID": d.recipientID, "recipientName": d.recipientName}
+                        {"recipientID": d.recipientID, "recipientName": d.recipientName, "sort": d.sort }
                     );
                 });
+
+        options.sort(function(a,b){
+            return a.sort - b.sort
+        });
 
         update_list_values("#chart-block-1", options);
 
@@ -401,7 +405,8 @@ Promise.all([
      -----------  calculate__3  ------
      --------------------------------------  */
     function calculate__3(df) {
-        var options = getSelectedValues("#chart-block-2", df).options;
+        var options = getSelectedValues("#chart-block-2", df).options;        
+
         var filtered_arr = getSelectedValues("#chart-block-2", df).data;
         var update_list = getSelectedValues("#chart-block-2", df).update;
 
