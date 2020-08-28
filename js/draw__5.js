@@ -6,20 +6,23 @@ const scatter_margin = {top: 40, right: 10, bottom: 30, left: 120},
     scatter_height = 500 - scatter_margin.top - scatter_margin.bottom;
 
 
-const svg_5 = d3.select("#chart_5")
+const pre_svg = d3.select("#chart_5")
     .attr("class", "svgWrapper")
     //.attr("width", scatter_width + scatter_margin.left + scatter_margin.right)
-    .attr("height", scatter_height + scatter_margin.top + scatter_margin.bottom)
+    .attr("height", scatter_height + scatter_margin.top + scatter_margin.bottom);
+
+
+const svg_5 = pre_svg
     .append("g")
     .attr("transform", "translate(" + scatter_margin.left + "," + 0 + ")");
 
 var scatter_x1 = d3.scaleBand().padding([0.1]);
-var scatter_x2 = d3.scaleBand();
+var scatter_x2 = d3.scaleBand().padding([0.2]);
 
 var scatter_yScale = d3.scaleBand();
 
 var scatter_rScale = d3.scaleSqrt()
-    .range([2, 9]);
+    .range([3, 10]);
 
 //Add group for the x axis
 svg_5
@@ -39,6 +42,9 @@ function draw_scatter(df){
     var new_width = d3.select("#chart-block-4").select(".col-1-2").node().getBoundingClientRect().width - scatter_margin.left - scatter_margin.right;
     var new_height = df.y_domain.length * 17 + scatter_margin.top;
 
+
+
+// Pan and zoom
     d3.select("#chart_5")
         .attr("width", new_width + scatter_margin.left + scatter_margin.right)
         .attr("height", new_height + stacked_margin.top);
@@ -58,11 +64,12 @@ function draw_scatter(df){
         .domain(df.y_domain);
 
     scatter_rScale
-        .domain([0, d3.max(df.data, function(array) {
-            return d3.max(array.values, function(d){
-                return  d.sum })
-            })
-        ]);
+        // .domain([0, d3.max(df.data, function(array) {
+        //     return d3.max(array.values, function(d){
+        //         return  d.sum })
+        //     })
+        // ])
+        .domain([0, 1000000]);
 
 
     svg_5.select(".y-axis")
@@ -83,8 +90,6 @@ function draw_scatter(df){
         .call(d3.axisBottom(scatter_x1)
             .ticks(3)
             .tickSizeOuter(0));
-
-
 
     var group = svg_5.selectAll("g.group")
         .data(df.data);
@@ -127,8 +132,9 @@ function draw_scatter(df){
 
     circles.enter().append("circle")
         .attr("class", "circle tip")        
-        .style("fill", saturatedBlue)
-        .style("opacity", 0,8)
+        .style("fill", transparentBlue)
+        .style("stroke", "grey")
+        .style("opacity", 1)
         .transition().duration(transition_time)
         .attr("cx", function (k) {
             return scatter_x2(k.day)
@@ -138,19 +144,10 @@ function draw_scatter(df){
         .attr("r", function(d){ return scatter_rScale(d.sum)})
         .attr("data-tippy-content", function(d) {
               return "<b>"+d.category + '</b><br>' + d.day + "/" + d.month + ": " + d3.format(".2s")(d.sum)
-        });
+        })
+    ;
 
 
     circles.exit().remove();
-
-    // tippy('.tip', {
-    //     allowHTML: true,
-    //     content: 'Global content',
-    //     duration: 0,
-    //     onShow(tip) {
-    //         tip.setContent(tip.reference.getAttribute('data-tippy-content'))
-    //     }
-    //
-    // });
 
 }
