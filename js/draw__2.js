@@ -26,6 +26,10 @@ svg_2.append("g")
 
 
 function draw_detail(df){
+
+   
+    
+    
     var new_width =  d3.select("#grid-clone").select("#col-2-clone").node().getBoundingClientRect().width - detail_margin.left - detail_margin.right;
 
     d3.select("#chart_2")

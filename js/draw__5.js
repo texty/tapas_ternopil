@@ -48,6 +48,9 @@ var clip = scatter_yAxis.append("rect")
 function draw_scatter(df){
     //Update the scales
 
+    var tips = [1,2,3,4,5,6,7,8,9,10,11,12];
+    var tips_to_show = ["січ", "лют", "бер", "кві", "тра", "чер", "лип", "сер", "вер", "жов", "лис","гру"];
+
     var new_width = d3.select("#chart-block-4").select(".col-1-2").node().getBoundingClientRect().width - scatter_margin.left - scatter_margin.right;
     var new_height = df.y_domain.length * 17 + scatter_margin.top;
 
@@ -93,7 +96,11 @@ function draw_scatter(df){
         .transition()
         .duration(transition_time)
         .call(d3.axisBottom(scatter_x1)
-            .ticks(3)
+            .tickFormat(function(d){
+                let ind = tips.indexOf(d);
+                return tips_to_show[ind]
+
+                })
             .tickSizeOuter(0));
 
     var group = svg_5.selectAll("g.group")
@@ -191,7 +198,11 @@ function draw_scatter(df){
                 .transition()
                 .duration(transition_time)
                 .call(d3.axisBottom(scatter_x1)
-                    .ticks(3)
+                    .tickFormat(function(d){
+                        let ind = tips.indexOf(d);
+                        return tips_to_show[ind]
+
+                    })
                     .tickSizeOuter(0));
 
             d3.select("#chart_5").selectAll(".group").attr("transform", function(d){

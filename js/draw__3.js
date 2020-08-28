@@ -32,6 +32,8 @@ svg_3.append("g")
 
 function draw_time(df){
 
+    var tips_to_show = ["січ", "лют", "бер", "кві", "тра", "чер", "лип", "сер", "вер", "жов", "лис","гру"];
+
     var new_width = d3.select("#chart-block-2").select(".col-1-2").node().getBoundingClientRect().width - time_margin.left - time_margin.right;
     var new_height = new_width > 500 ? (500 - time_margin.top - time_margin.bottom) : (300 - time_margin.top - time_margin.bottom);
     
@@ -64,8 +66,13 @@ function draw_time(df){
         .transition()
         .duration(transition_time)
         .call(d3.axisBottom(time_xScale)
-            .ticks(3)
-            .tickSize(0)
+            .tickSizeOuter(0)
+            .tickFormat(function(d){
+                let ind = real_tips.indexOf(d);
+                return tips_to_show[ind]
+
+            })
+
         );
 
 
