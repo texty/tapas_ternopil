@@ -68,12 +68,12 @@ function getSelectedValues(parent, df){
     })
         .forEach(function (d) {
             options.push(
-                {"recipientID": d.recipientID, "recipientName": d.recipientName, "sort": d.sort }
+                {"recipientID": d.recipientID, "recipientName": d.recipientName, "sort": d.sort, "type": d.type }
             );
         });
 
     options.sort(function(a,b){
-        return a.sort - b.sort
+        return d3.descending(a.type, b.type) || d3.ascending(a.recipientName[0], b.recipientName[0]) || a.sort - b.sort
     });
 
     return { "data": filtered_arr, "update": update, 'options': options }

@@ -341,12 +341,12 @@ Promise.all([
             })
                 .forEach(function (d) {
                     options.push(
-                        {"recipientID": d.recipientID, "recipientName": d.recipientName, "sort": d.sort }
+                        {"recipientID": d.recipientID, "recipientName": d.recipientName, "sort": d.sort, "type": d.type }
                     );
                 });
 
         options.sort(function(a,b){
-            return a.sort - b.sort
+            return d3.descending(a.type, b.type) || d3.ascending(a.recipientName[0], b.recipientName[0]) || a.sort - b.sort
         });
 
         update_list_values("#chart-block-1", options);
