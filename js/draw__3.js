@@ -87,8 +87,8 @@ function draw_time(df){
         .attr("x", function (d, i) { return time_xScale(d.month);  })
         .attr("width",  time_xScale.bandwidth() )
         .attr("height", function (d) { return new_height - time_yScale(d.sum)})
-        .attr("rx", time_xScale.bandwidth() / 2 )
-        .attr("ry", time_xScale.bandwidth() / 2 )
+        .attr("rx", time_xScale.bandwidth() / 2.5 )
+        .attr("ry", time_xScale.bandwidth() / 2.5 )
         .attr("data-tippy-content", function(d) {
             let ind = real_tips.indexOf(d.month);
             return desire_tips[ind] + ": " + d3.format(".2s")(d.sum)
@@ -96,8 +96,8 @@ function draw_time(df){
 
     time_bar.enter().append("rect")
         .attr("class", "detail tip")
-        .attr("rx", time_xScale.bandwidth() / 2 )
-        .attr("ry", time_xScale.bandwidth() / 2 )
+        .attr("rx", time_xScale.bandwidth() / 2.5 )
+        .attr("ry", time_xScale.bandwidth() / 2.5 )
         .style("fill", saturatedBlue)
         .transition().duration(transition_time)
         .attr("y", function (d) { return time_yScale(d.sum)})
