@@ -122,8 +122,17 @@ Promise.all([
 
     //показуємо і ховаємо випадаючі списки по кліку
     d3.selectAll(".model")
-         .on("click", function(){
+         .on("click", function(e){
+             //e.stopPropagation();
              $('ul.dropdown').hide();
+             d3.selectAll(".dropdown-line:not(#line_"+ this.id + ")")
+                 .classed("dropdown-rainbow", false)
+                 .classed("dropdown-passive", true);
+
+             d3.selectAll("ul.dropdown:not(#dropdown_"+ this.id + ")")
+                 .classed("hidden", true)
+                 .style("display", "none");
+
              let input = d3.select(this.parentNode).select(".dropdown-line");
              input.classed("dropdown-rainbow", !input.classed("dropdown-rainbow"));
              input.classed("dropdown-passive", !input.classed("dropdown-passive"));
