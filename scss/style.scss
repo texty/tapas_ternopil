@@ -75,9 +75,13 @@ header {
 
 
   .title-wrapper {
+    margin-top: -50px;
     display: flex;
     grid-column: 1/5;
     grid-row: 1/2;
+    @media(max-width: 991px){
+      margin-top: 0;
+    }
 
     .title {
       margin: auto;
@@ -104,6 +108,23 @@ header {
         @media(max-width: 991px){
           width: 100%;
           margin: auto;
+        }
+      }
+
+
+      .button {
+        padding: 16px 40px;
+        background: transparent;
+        border-radius: 40px;
+        font-size: 16px;
+        line-height: 24px;
+        text-align: center;
+        border: 2px solid black;
+
+        &:hover {
+          background: black;
+          color: white;
+
         }
       }
     } // title end

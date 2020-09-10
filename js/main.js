@@ -6,10 +6,15 @@ var target_cx;
 
 $(".nav-button").click(function() {
     var href = $(this).attr("link");
-    console.log(href);
     $([document.documentElement, document.body]).animate({
-        scrollTop: $(href).offset().top 
+        scrollTop: $(href).offset().top
     }, 2000);
+});
+
+$(".title > .button").click(function() {
+    $([document.documentElement, document.body]).animate({
+        scrollTop: $("#main").offset().top
+    }, 700);
 });
 
 
