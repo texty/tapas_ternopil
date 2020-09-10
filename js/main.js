@@ -8,7 +8,7 @@ $(".nav-button").click(function() {
     var href = $(this).attr("link");
     $([document.documentElement, document.body]).animate({
         scrollTop: $(href).offset().top
-    }, 2000);
+    }, 1000);
 });
 
 $(".title > .button").click(function() {
