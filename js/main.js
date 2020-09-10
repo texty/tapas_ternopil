@@ -4,6 +4,14 @@
 const parseDate = d3.timeParse("%Y-%m-%d");
 var target_cx;
 
+$(".nav-button").click(function() {
+    var href = $(this).attr("link");
+    console.log(href);
+    $([document.documentElement, document.body]).animate({
+        scrollTop: $(href).offset().top - 100
+    }, 2000);
+});
+
 
 Promise.all([
     d3.csv("data/charitable_contribs.csv"),
