@@ -139,6 +139,8 @@ header {
           header .logo-wrapper .logo-list #usaid,
           header .logo-wrapper .logo-list #eurasia {
             height: calc(30px + 2vw); } }
+      header .logo-wrapper .logo-list #ternopil {
+        max-height: 80px; }
       header .logo-wrapper .logo-list #ukaid {
         max-height: 50px;
         height: calc(30px + 2vw); }
