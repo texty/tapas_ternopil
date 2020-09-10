@@ -172,11 +172,16 @@ header {
   justify-content: flex-start;
   position: sticky;
   top: 0;
-  min-height: 80px;
+  min-height: 60px;
   background-color: white;
   z-index: 10000000000; }
 
+.nav-inner {
+  width: 100%;
+  margin: auto 0; }
+
 .nav-menu {
+  grid-column: 1/-1;
   margin: auto 0;
   display: flex;
   flex-wrap: wrap;
@@ -251,37 +256,37 @@ a {
   margin: 0 0 20px 0;
   color: #000; }
 
-.text, nav {
+.text, .nav-inner {
   margin: 10px auto;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr; }
   @media (min-width: 1680px) {
-    .text, nav {
+    .text, .nav-inner {
       width: 1408px; } }
   @media (min-width: 1280px) and (max-width: 1679px) {
-    .text, nav {
+    .text, .nav-inner {
       max-width: 1120px; } }
   @media (min-width: 992px) and (max-width: 1279px) {
-    .text, nav {
+    .text, .nav-inner {
       width: 864px; } }
   @media (max-width: 991px) and (min-width: 480px) {
-    .text, nav {
+    .text, .nav-inner {
       width: 448px;
       display: block; } }
   @media (max-width: 479px) {
-    .text, nav {
+    .text, .nav-inner {
       width: 90%;
       margin: 0 auto;
       display: block; } }
-  .text h2, .text h3, .text h4, .text h5, .text .tab-content, nav h2, nav h3, nav h4, nav h5, nav .tab-content {
+  .text h2, .text h3, .text h4, .text h5, .text .tab-content, .nav-inner h2, .nav-inner h3, .nav-inner h4, .nav-inner h5, .nav-inner .tab-content {
     grid-column: 1/3; }
-  .text .tab-content, nav .tab-content {
+  .text .tab-content, .nav-inner .tab-content {
     margin: 50px auto 0;
     padding: 30px;
     border: 2px solid;
     border-image: radial-gradient(92.76% 76.25% at 7.24% 21%, #B5D39D 0%, #F1ACAC 25.66%, #BF98C6 54.47%, #7179EF 86.04%, #2833D0 100%) 1;
     background-color: #FFF7E3; }
-  .text h5, nav h5 {
+  .text h5, .nav-inner h5 {
     margin: 0;
     padding: 0;
     font-family: 'e-Ukraine-Regular', sans-serif;
