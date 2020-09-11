@@ -63,38 +63,6 @@ Promise.all([
         .text(function(d){ return d });
 
 
-    // //перший графік переключення
-    // d3.select("#chart-block-1").selectAll(".year_model, .type_model")
-    //     .on("change", function(){
-    //         d3.select(this.parentNode.parentNode).select(".recipient_model").select("p").attr("value", "").text("Оберіть опцію зі списку");
-    //         draw__1(calculate__1(input[0]));
-    //         draw_detail(calculate__2(input[0]));
-    //     });
-    //
-    //
-    // //другий графік переключення
-    // d3.select("#chart-block-2").selectAll(".year_model, .type_model")
-    //     .on("change", function(){
-    //        d3.select(this.parentNode.parentNode).select(".recipient_model").select("p").attr("value", "").text("Оберіть опцію зі списку");
-    //        draw_time((calculate__3(input[0])))
-    //     });
-    //
-    // //третій графік переключення
-    // d3.select("#chart-block-3").select("select.year_model")
-    //     .on("change", function(){
-    //         d3.select(this.parentNode.parentNode).select(".recipient_model").select("p").attr("value", "").text("Оберіть опцію зі списку");
-    //         draw_stacked((calculate__4(input[1])));
-    //     });
-    //
-    // d3.select("#chart-block-4").selectAll(".year_model, .type_model")
-    //     .on("change", function(){
-    //         d3.select(this.parentNode.parentNode).select(".recipient_model").select("p").attr("value", "").text("Оберіть опцію зі списку");
-    //         draw_scatter(calculate__5(input[0]));
-    //     });
-    //
-
-
-
     //додаємо "назви" в третій селект 1,2,4, графіків
     var  recipient_options = [];
     _.uniq(input[0], function(d){ return d.recipientName }).forEach(function(d){
