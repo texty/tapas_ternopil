@@ -278,6 +278,7 @@ Promise.all([
             draw_stacked((calculate__4(input[1])))
         } else if(grandID === "chart-block-4"){
             draw_scatter(calculate__5(input[0]));
+
         }
 
         tippy('.tip', {
@@ -500,7 +501,6 @@ Promise.all([
             update_list_values("#chart-block-4", options);
         }
 
-
         var nest = d3.nest()
             .key(function(d) { return d.wide_cat;  })
             .key(function(d) { return d.day; })
@@ -532,6 +532,23 @@ Promise.all([
             });
 
 
+        //для другого варіанту з brush, сумуємо пожертки за типом і датою
+        var helper = {};
+        var result = filtered_arr.reduce(function(r, o) {
+            var key = o.wide_cat + '-' + o.date;
+
+            if(!helper[key]) {
+                helper[key] = Object.assign({}, o); // create a copy of o
+                r.push(helper[key]);
+            } else {
+                helper[key].valueAmount += o.valueAmount;
+                //helper[key].instances += o.instances;
+            }
+
+            return r;
+        }, []);
+
+
         var y_domain = [];
 
        d3.nest()
@@ -555,7 +572,8 @@ Promise.all([
             .key(function(d){ return d.month})
             .entries(data);
 
-        return { "data": data, "y_domain": y_domain };
+        //return { "data": data, "y_domain": y_domain };
+        return { "data": result, "y_domain": y_domain };
     }
 
 
@@ -567,7 +585,7 @@ Promise.all([
     draw_time((calculate__3(input[0])));
     draw_stacked(calculate__4(input[1]));
     draw_scatter(calculate__5(input[0]));
-
+   // draw_scatter(input[0]);
 
     d3.select(window).on('resize', function() {
         draw_detail(calculate__2(input[0]));
@@ -606,7 +624,7 @@ Promise.all([
         });
 
     // removes handle to resize the brush
-    d3.selectAll('.brush>.handle').remove();
+    d3.select("#chart-block-1").selectAll('.brush >.handle').remove();
 
     function brushmove() {
          var extent = d3.event.selection;

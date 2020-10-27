@@ -2,23 +2,20 @@
  * Created by yevheniia on 12.08.20.
  */
 const scatter_margin = {top: 40, right: 10, bottom: 30, left: 120},
-    //scatter_width = d3.select("#chart_3").node().getBoundingClientRect().width - scatter_margin.left - scatter_margin.right,
-    scatter_height = 500 - scatter_margin.top - scatter_margin.bottom;
+      scatter_height = 500 - scatter_margin.top - scatter_margin.bottom;
 
 
 const pre_svg = d3.select("#chart_5")
     .attr("class", "svgWrapper")
-    //.attr("width", scatter_width + scatter_margin.left + scatter_margin.right)
     .attr("height", scatter_height + scatter_margin.top + scatter_margin.bottom);
 
 
-const svg_5 = pre_svg
-    .append("g")
+const svg_5 = pre_svg.append("g")
     .attr("transform", "translate(" + scatter_margin.left + "," + 0 + ")");
 
 
 var scatter_x1 = d3.scaleBand().padding([0.2]);
-var scatter_x2 = d3.scaleBand()
+var scatter_x2 = d3.scaleBand();
 
 var scatter_yScale = d3.scaleBand();
 
@@ -40,9 +37,7 @@ var scatter_yAxis = svg_5.append("g")
 var clip = scatter_yAxis.append("rect")
     .attr("x", -120)
     .attr("y", 0)
-    .attr("fill", charts_background)
-
-;
+    .attr("fill", charts_background);
 
 
 function draw_scatter(df){
@@ -55,7 +50,9 @@ function draw_scatter(df){
     var new_height = df.y_domain.length * 17 + scatter_margin.top;
 
 
-    pre_svg.call(zoom);
+    pre_svg.call(zoom)
+        //.call(zoom.transform, d3.zoomIdentity.scale(8,8))
+    ;
 
 
     clip
@@ -168,14 +165,13 @@ function draw_scatter(df){
         .duration(zero_duration)
         .call(d3.axisLeft(scatter_yScale)
             .tickSize(0)
-            .tickFormat(function(d) {
-                return d.substring(0, 12) + "...";
-            })
+            .tickFormat(function(d) {  return d.substring(0, 12) + "...";  })
             .tickSizeOuter(0)
         );
 
     function zoom() {
         const extent = [[0, 0], [new_width, new_height]];
+
 
         pre_svg.call(d3.zoom()
             .scaleExtent([1, 8])
@@ -184,6 +180,9 @@ function draw_scatter(df){
             .on("zoom", zoomed));
 
         function zoomed() {
+            console.log(d3.event.transform);
+            console.log(new_width);
+
             scatter_x1
                 .range([0, new_width]
                 .map(function(d) { return d3.event.transform.applyX(d) } ));
