@@ -584,7 +584,11 @@
     <script>
         $('.collapsible').on('click', function(){
             $(this).find(".circle-plus").toggleClass('opened');
-            $(this).find("p.ordinal").toggleClass("hidden")
+            $(this).find("p.ordinal").toggleClass("hidden");
+            var el = $(this),
+                    curHeight = el.height(),
+                    autoHeight = el.css('height', 'max-content').height();
+            el.height(curHeight).animate({height: autoHeight}, 100);
         })
     </script>
 

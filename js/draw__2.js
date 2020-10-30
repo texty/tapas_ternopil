@@ -64,7 +64,7 @@ function draw_detail(df){
             .ticks(3)
             .tickSizeOuter(0)
             //.tickFormat(function(d){ return d/1000})
-            //.tickFormat(d3.format(".2s"))
+            .tickFormat(nFormatter)
         );
 
 

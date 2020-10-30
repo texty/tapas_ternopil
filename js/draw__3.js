@@ -1,7 +1,7 @@
 /**
  * Created by yevheniia on 11.08.20.
  */
-const time_margin = {top: 40, right: 10, bottom: 30, left: 100},
+const time_margin = {top: 40, right: 10, bottom: 30, left: 60},
     time_width = d3.select("#chart_3").node().getBoundingClientRect().width - time_margin.left - time_margin.right,
     time_height = 500 - time_margin.top - time_margin.bottom;
 
@@ -58,6 +58,7 @@ function draw_time(df){
         .call(d3.axisLeft(time_yScale)
             .tickSize(-new_width)
             //.tickFormat(d3.format(".2s"))
+            .tickFormat(nFormatter)
 
         );
 

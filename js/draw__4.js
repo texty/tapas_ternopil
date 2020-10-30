@@ -2,6 +2,8 @@
  * Created by yevheniia on 12.08.20.
  */
 
+
+
 const stacked_margin = {top: 40, right: 10, bottom: 50, left: 150},
     stacked_width = d3.select("#chart_4").node().getBoundingClientRect().width - stacked_margin.left - stacked_margin.right,
     stacked_height = 500 - stacked_margin.top - stacked_margin.bottom;
@@ -80,7 +82,8 @@ function draw_stacked(df){
         .duration(zero_duration)
         .attr("transform", "translate(0," + (new_height + 5) + ")")
         .call(d3.axisBottom(stacked_xScale)
-            .ticks(3)
+            .ticks(4)
+            .tickFormat(function(d){ return nFormatter(d) })
             //.tickFormat(d3.format(".2s"))
         );
 

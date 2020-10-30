@@ -37,6 +37,9 @@ header {
     width: 100%;
     min-height: 40vh;
     background: url(../img/cover.png) no-repeat 0 50%/cover; }
+    @media (max-width: 768px) {
+      header .image-container {
+        display: none; } }
     header .image-container img {
       width: 100%; }
       @media (min-width: 1480px) {
@@ -192,6 +195,9 @@ header {
   min-height: 60px;
   background-color: white;
   z-index: 10000000000; }
+  @media (max-width: 900px) and (orientation: landscape) {
+    .nav-wrapper {
+      position: relative; } }
 
 .nav-inner {
   width: 100%;
@@ -289,11 +295,12 @@ a {
   @media (max-width: 991px) and (min-width: 480px) {
     #about-project {
       width: 448px;
-      display: block; } }
+      display: block;
+      margin: 50px auto; } }
   @media (max-width: 479px) {
     #about-project {
       width: 90%;
-      margin: 0 auto;
+      margin: 50px auto;
       display: block; } }
   #about-project h1 {
     margin: auto;
@@ -750,13 +757,14 @@ footer {
     display: none; } }
 .collapsible {
   cursor: pointer;
-  height: max-content;
   padding: 20px;
   border: double 2px transparent;
   background-image: -webkit-gradient(linear, left top, left bottom, from(white), to(white)), radial-gradient(circle at top left, #C3AAB2 0.66%, #99EECC 57.2%, #80C0C8 75.87%, #4B8BFA 98.72%);
   background-image: linear-gradient(white, white), radial-gradient(circle at top left, #C3AAB2 0.66%, #99EECC 57.2%, #80C0C8 75.87%, #4B8BFA 98.72%);
   background-origin: border-box;
-  transition: height 0.5s ease-in-out;
+  height: max-content;
+  transition: all 0.4s;
+  overflow-y: hidden;
   background-clip: padding-box, border-box; }
   .collapsible .collaps-header {
     position: relative; }
@@ -814,7 +822,7 @@ rect.selection {
   stroke: none; }
 
 #chart_1 rect.selection {
-  fill: grey; }
+  fill: lightgrey; }
 
 #chart_5 rect.selection {
   fill: #fff7e3; }

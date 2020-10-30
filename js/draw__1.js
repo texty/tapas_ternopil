@@ -70,7 +70,7 @@ main_xAxis = d3.axisTop(main_xScale)
     .ticks(2)
     .tickSizeOuter(0)
     //.tickFormat(function(d){ return d/1000})
-    //.tickFormat(d3.format(".2s"))
+    .tickFormat(nFormatter)
 ;
 
 //Add group for the x axis
