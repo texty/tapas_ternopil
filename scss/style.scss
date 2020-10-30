@@ -902,6 +902,26 @@ footer {
 
   .collaps-header {
     position: relative;
+    display: flex;
+    align-items: center;
+
+
+    img {
+      height: 36px;
+      width: 36px;
+      margin-right:5px;
+      @media(min-width: 1280px){
+        transform: rotate(-90deg);
+
+      }
+    }
+
+
+    p {
+      width: 90%;
+      font-size: 1.2em;
+      padding: 0 2em 0 0;
+    }
   }
 
 
@@ -933,7 +953,7 @@ footer {
   .circle-plus {
     cursor:pointer;
     position:absolute;
-    top:0;
+    top:5px;
     right:0;
     height: 4em;
     width: 2em;
@@ -973,6 +993,7 @@ rect.selection {
   fill-opacity: 0.9;
   stroke-width: 0;
   stroke: none;
+  min-width: 30px;
   //stroke-dasharray: 20,100,20,200;
 }
 

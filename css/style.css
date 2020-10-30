@@ -767,7 +767,20 @@ footer {
   overflow-y: hidden;
   background-clip: padding-box, border-box; }
   .collapsible .collaps-header {
-    position: relative; }
+    position: relative;
+    display: flex;
+    align-items: center; }
+    .collapsible .collaps-header img {
+      height: 36px;
+      width: 36px;
+      margin-right: 5px; }
+      @media (min-width: 1280px) {
+        .collapsible .collaps-header img {
+          transform: rotate(-90deg); } }
+    .collapsible .collaps-header p {
+      width: 90%;
+      font-size: 1.2em;
+      padding: 0 2em 0 0; }
   .collapsible .closed .vertical {
     transition: all 0.5s ease-in-out;
     transform: rotate(-90deg); }
@@ -787,7 +800,7 @@ footer {
   .collapsible .circle-plus {
     cursor: pointer;
     position: absolute;
-    top: 0;
+    top: 5px;
     right: 0;
     height: 4em;
     width: 2em;
@@ -819,7 +832,8 @@ footer {
 rect.selection {
   fill-opacity: 0.9;
   stroke-width: 0;
-  stroke: none; }
+  stroke: none;
+  min-width: 30px; }
 
 #chart_1 rect.selection {
   fill: lightgrey; }

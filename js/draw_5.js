@@ -183,6 +183,7 @@ function draw_scatter(data){
         .extent([[0, 0], [scatter_width, scatter_height2]])
         .on("brush", brushed);
 
+
     clip5def
         .attr("width", scatter_width + 20)
         .attr("height", scatter_height + 30);
@@ -338,10 +339,17 @@ function draw_scatter(data){
 
 
 
-//create brush function redraw scatterplot with selection
     function brushed() {
 
         var selection = d3.event.selection;
+
+        //якщо extent менше 30
+        if((selection[1] - selection[0]) < 40){
+            selection[1] = selection[0] + 40;
+            context.select(".brush")
+                .call(brush.move, [selection[0], selection[1]]);
+        }
+
 
         if (selection == null) {
             handle.attr("display", "none");
@@ -352,6 +360,7 @@ function draw_scatter(data){
         }
 
         scatter_x.domain(selection.map(scatter_x2.invert, scatter_x2));
+
         focus.selectAll(".focus-dot")
             .attr("cx", function (d) {
                 return scatter_x(d.parsedDate);
@@ -365,6 +374,8 @@ function draw_scatter(data){
                 .tickFormat(multiFormat)
                 .ticks(5));
     }
+
+
 
     //
     // function type(d) {
