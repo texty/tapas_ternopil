@@ -63,7 +63,8 @@ function draw_detail(df){
         .call(d3.axisTop(detail_xScale)
             .ticks(3)
             .tickSizeOuter(0)
-            .tickFormat(d3.format(".2s"))
+            //.tickFormat(function(d){ return d/1000})
+            //.tickFormat(d3.format(".2s"))
         );
 
 
@@ -78,12 +79,12 @@ function draw_detail(df){
         .transition().duration(zero_duration)
         .attr("width", function (d) { return detail_xScale(d.sum);  })
         .attr("data-tippy-content", function(d) {
-            return d.category + ": " + d3.format(".2s")(d.sum)
+            return d.category + ": " + d3.format(",.2r")(d.sum)
         });
 
     detail_bar.enter().append("rect")
         .attr("data-tippy-content", function(d) {
-            return d.category + ": " + d3.format(".2s")(d.sum)
+            return d.category + ": " + d3.format(",.2r")(d.sum)
         })
         .attr("class", "detail tip")
         .attr("xVal", function (d) { return detail_yScale(d.category) })

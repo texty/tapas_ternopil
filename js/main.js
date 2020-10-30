@@ -786,7 +786,7 @@ Promise.all([
                  let name = recipient_options.find(function(k){
                      return k.recipientID === d.school_id
                  });
-                    return name.recipientName + ": " + d3.format(".2s")(d.sum) });
+                    return name.recipientName + ": " + d3.format(",.2r")(d.sum) });
 
 
          bar.enter().append("rect")
@@ -798,7 +798,7 @@ Promise.all([
                  let name = recipient_options.find(function(k){
                      return +k.recipientID === +d.school_id
                  });
-                     return name.recipientName + ": " + d3.format(".2s")(d.sum);
+                     return name.recipientName + ": " + d3.format(",.2r")(d.sum);
 
              })
              .on("click", function (d) {

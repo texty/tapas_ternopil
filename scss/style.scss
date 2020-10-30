@@ -283,7 +283,7 @@ header {
 }
 
 
-#chapter-2, #chapter-4 {
+#chapter-1, #chapter-3 {
   background-color: $charts_background;
 }
 
@@ -321,7 +321,7 @@ h4 {
 }
 
 p, li {
-  margin: 10px 0;
+  margin: 15px 0;
   grid-column: 1/3;
   font-family: 'e-Ukraine-Regular', sans-serif;
   font-style: normal;
@@ -348,6 +348,61 @@ a {
   color: #000;
 }
 
+
+#about-project {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr;
+  margin-bottom: 100px;
+
+  @media(min-width: 1680px){
+    width: 1408px;
+  }
+  @media(min-width: 1280px) and (max-width: 1679px){
+    max-width: 1120px;
+  }
+  @media(min-width: 992px) and (max-width: 1279px){
+    width: 864px;
+  }
+  @media(max-width: 991px) and (min-width: 480px){
+    width: 448px;
+    display: block;
+  }
+  @media(max-width:479px){
+    width: 90%;
+    margin: 0 auto;
+    display: block;
+  }
+
+
+  h1 {
+    margin: auto;
+    font-weight: normal;
+    font-size: 2.9em;
+  }
+
+
+
+}
+
+.button-black {
+  display: block;
+  margin: 30px auto 0 0 ;
+  padding: 16px 40px;
+  background: black;
+  border-radius: 40px;
+  font-size: 16px;
+  line-height: 24px;
+  text-align: center;
+  border: 2px solid black;
+  color: white;
+  width: max-content;
+
+  &:hover {
+    background: black;
+    color: white;
+
+  }
+}
 
 .text, .nav-inner {
   margin: 10px auto ;
@@ -408,9 +463,9 @@ a {
 
 .incut {
   padding: 0 20px;
-  background-color: #E6EBE6;
+  background-color: #fafffa;
   grid-column: 1/3;
-  margin: 30px 0;
+  margin: 0 0 50px 0;
 }
 
 /* ---------------------------------------
@@ -904,6 +959,31 @@ footer {
     top: 50%;
     margin-top: -12px;
   }
+}
+
+rect.selection {
+  fill-opacity: 0.9;
+  stroke-width: 0;
+  stroke: none;
+  //stroke-dasharray: 20,100,20,200;
+}
+
+#chart_1 {
+  rect.selection {
+    fill: grey;
+  }
+
+}
+
+#chart_5 {
+  rect.selection {
+    fill: #fff7e3;
+  }
+}
+
+
+.handle.handle--w, .handle.handle--e {
+  //fill: grey;
 }
 
 

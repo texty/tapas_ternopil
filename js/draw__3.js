@@ -1,7 +1,7 @@
 /**
  * Created by yevheniia on 11.08.20.
  */
-const time_margin = {top: 40, right: 10, bottom: 30, left: 50},
+const time_margin = {top: 40, right: 10, bottom: 30, left: 100},
     time_width = d3.select("#chart_3").node().getBoundingClientRect().width - time_margin.left - time_margin.right,
     time_height = 500 - time_margin.top - time_margin.bottom;
 
@@ -57,7 +57,7 @@ function draw_time(df){
         .duration(transition_time)
         .call(d3.axisLeft(time_yScale)
             .tickSize(-new_width)
-            .tickFormat(d3.format(".2s"))
+            //.tickFormat(d3.format(".2s"))
 
         );
 
@@ -91,7 +91,7 @@ function draw_time(df){
         .attr("ry", time_xScale.bandwidth() / 2.5 )
         .attr("data-tippy-content", function(d) {
             let ind = real_tips.indexOf(d.month);
-            return desire_tips[ind] + ": " + d3.format(".2s")(d.sum)
+            return desire_tips[ind] + ": " + d3.format(",.2r")(d.sum)
         });
 
     time_bar.enter().append("rect")
@@ -106,7 +106,7 @@ function draw_time(df){
         .attr("height", function (d) { return new_height - time_yScale(d.sum)})
         .attr("data-tippy-content", function(d) {
             let ind = real_tips.indexOf(d.month);
-            return desire_tips[ind] + ": " + d3.format(".2s")(d.sum)
+            return desire_tips[ind] + ": " + d3.format(",.2r")(d.sum)
         });
 
 
