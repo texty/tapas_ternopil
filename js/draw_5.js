@@ -231,7 +231,7 @@ function draw_scatter(data){
 
     context.select(".brush")
         .call(brush)
-        .call(brush.move, [50, 120]);
+        .call(brush.move, [50, 100]);
 
 
     d3.selectAll("path.v-brush-handle")
@@ -263,7 +263,7 @@ function draw_scatter(data){
             return scatter_y(d.wide_cat);
         })
         .attr("data-tippy-content", function(d) {
-            return d.parsedDate
+            return "<b>"+d.wide_cat + '</b><br>' + d.date + ": " + d3.format(",.2r")(d.valueAmount)
         });
 
 
@@ -283,7 +283,7 @@ function draw_scatter(data){
                 return scatter_y(d.wide_cat);
             })
             .attr("data-tippy-content", function(d) {
-                return d.parsedDate
+                return "<b>"+d.wide_cat + '</b><br>' + d.date + ": " + d3.format(",.2r")(d.valueAmount)
             })
             .on("mouseover", function(d){
                 d3.selectAll(".focus-dot").attr("r", function(d){ return scatter_rScale(d.valueAmount) });
