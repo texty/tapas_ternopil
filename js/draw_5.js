@@ -266,7 +266,7 @@ function draw_scatter(data){
             return scatter_y(d.wide_cat);
         })
         .attr("data-tippy-content", function(d) {
-            return "<b>"+d.wide_cat + '</b><br>' + d.date + ": " + d.valueAmount
+            return "<b>"+d.wide_cat + '</b><br>' + d.date + ": " + d.valueAmount + " грн"
         });
 
 
@@ -286,7 +286,7 @@ function draw_scatter(data){
                 return scatter_y(d.wide_cat);
             })
             .attr("data-tippy-content", function(d) {
-                return "<b>"+d.wide_cat + '</b><br>' + d.date + ": " + d.valueAmount
+                return "<b>"+d.wide_cat + '</b><br>' + d.date + ": " + d.valueAmount + " грн"
             })
             .on("mouseover", function(d){
                 d3.selectAll(".focus-dot").attr("r", function(d){ return scatter_rScale(d.valueAmount) });
