@@ -60,7 +60,7 @@ var clip5def = scatter_svg.append("defs")
     .append("clipPath")
     .attr("id", "clip5")
     .append("rect")
-    .attr("transform", "translate(5,-30)")
+    .attr("transform", "translate(0,-30)")
     ;
 
 
@@ -161,9 +161,12 @@ function draw_scatter(data){
         .attr("width", scatter_width + scatter_margin.left + scatter_margin.right)
         .attr("height", scatter_height + scatter_margin.top + scatter_margin.bottom);
 
+    var dateExtent =  d3.extent(filtered, function (d) { return d.parsedDate; });
+    var start_date = filtered[0].year - 1 + "-12-31";
+
     scatter_x
         .range([0, scatter_width])
-        .domain(d3.extent(filtered, function (d) { return d.parsedDate; }));
+        .domain([new Date(start_date), dateExtent[1]]);
 
     scatter_x2
         .range([0, scatter_width])
@@ -263,7 +266,7 @@ function draw_scatter(data){
             return scatter_y(d.wide_cat);
         })
         .attr("data-tippy-content", function(d) {
-            return "<b>"+d.wide_cat + '</b><br>' + d.date + ": " + d3.format(",.2r")(d.valueAmount)
+            return "<b>"+d.wide_cat + '</b><br>' + d.date + ": " + d.valueAmount
         });
 
 
@@ -283,7 +286,7 @@ function draw_scatter(data){
                 return scatter_y(d.wide_cat);
             })
             .attr("data-tippy-content", function(d) {
-                return "<b>"+d.wide_cat + '</b><br>' + d.date + ": " + d3.format(",.2r")(d.valueAmount)
+                return "<b>"+d.wide_cat + '</b><br>' + d.date + ": " + d.valueAmount
             })
             .on("mouseover", function(d){
                 d3.selectAll(".focus-dot").attr("r", function(d){ return scatter_rScale(d.valueAmount) });
