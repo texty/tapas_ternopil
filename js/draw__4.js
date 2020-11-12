@@ -44,6 +44,27 @@ var stacked_color = d3
         transparentBlue
     ]);
 
+
+function tippyContent(d){
+    let plans = d.data.plans >= 1000 ? moneyFormat(d.data.plans): Math.round(d.data.plans) ;
+    let budget = d.data.budget >= 1000 ? moneyFormat(d.data.budget): Math.round(d.data.budget) ;
+    let money = d.data.money >= 1000 ? moneyFormat(d.data.money): Math.round(d.data.money) ;
+    let products = d.data.products >= 1000 ? moneyFormat(d.data.products): Math.round(d.data.products) ;
+
+    var html = '';
+    html += d.data.wide_cat + ":<br>";
+    html += "Заплановані закупівлі: " + plans + " грн <br>";
+    html += "Бюджетні кошти: " + budget + " грн <br>";
+    html += "Грошові внески: " + money + " грн <br>";
+    html += "Негрошові внески: " + products +" грн";
+
+    return(html);
+}
+
+
+
+
+
 function draw_stacked(df){
 
     const real_groups = ["budget", "money", "products"];
@@ -117,32 +138,14 @@ function draw_stacked(df){
         .attr("rx", stacked_yScale.bandwidth() / 2)
         .attr("ry", stacked_yScale.bandwidth() /2 )
         .attr("data-tippy-content", function(d) {
-            return "<div style='margin-bottom: 10px; font-weight: bold;'>" + d.data.wide_cat + ": </div>"+
-                "Заплановані закупівлі: " + d3.format(",.2r")(d.data.plans) + "<br>"+
-                "Бюджетні кошти: " + d3.format(",.2r")(d.data.budget) + "<br>"+
-                "Грошові внески: " + d3.format(",.2r")(d.data.money) + "<br>"+
-                "Негрошові внески: " + d3.format(",.2r")(d.data.products) + "<br>";
+            return  tippyContent(d)
         })
-        // .on("mouseover", function(d) {
-        //     //bars.attr("stroke", "none");
-        //     d3.select(this).attr("stroke", "#000")
-        // })
-        // .on("mouseout", function(d) {
-        //     d3.select(this).attr("stroke", "none")
-        // })
         .merge(bars)
         .attr("height", stacked_yScale.bandwidth())
         .attr("y", function (d) { return stacked_yScale(d.data.wide_cat); })
         .attr("x", function (d) { return stacked_xScale(d[0]); })
+        .attr("data-tippy-content", function(d) { return  tippyContent(d)  })
         .transition().duration(transition_time)
-        .attr("data-tippy-content", function(d) {
-            return "<div style='margin-bottom: 10px; font-weight: bold;'>" + d.data.wide_cat + ": </div>"+
-                "Заплановані закупівлі: " + d3.format(",.2r")(d.data.plans) + "<br>"+
-                "Бюджетні кошти: " + d3.format(",.2r")(d.data.budget) + "<br>"+
-                "Грошові внески: " + d3.format(",.2r")(d.data.money) + "<br>"+
-                "Негрошові внески: " + d3.format(",.2r")(d.data.products) + "<br>";
-        })
-
         .attr("width", function (d) { return stacked_xScale(d[1]) - stacked_xScale(d[0]) })
 
     ;
@@ -167,23 +170,16 @@ function draw_stacked(df){
         .attr("rx", stacked_yScale.bandwidth() / 2)
         .attr("ry", stacked_yScale.bandwidth() /2 )
         .attr("data-tippy-content", function(d) {
-            return "<div style='margin-bottom: 10px; font-weight: bold'>" + d.data.wide_cat + ": </div>"+
-                "Заплановані закупівлі: " + d3.format(",.2r")(d.data.plans) + "<br>"+
-                "Бюджетні кошти: " + d3.format(",.2r")(d.data.budget) + "<br>"+
-                "Грошові внески: " + d3.format(",.2r")(d.data.money) + "<br>"+
-                "Негрошові внески: " + d3.format(",.2r")(d.data.products) + "<br>";
+            return  tippyContent(d)
         })
         .merge(plans)
         .attr("y", function (d) { return stacked_yScale(d.data.wide_cat); })
         .attr("x", 0 )
         .attr("height", stacked_yScale.bandwidth())
+
         .transition().duration(transition_time/2)
         .attr("data-tippy-content", function(d) {
-            return "<div style='margin-bottom: 10px; font-weight: bold;'>" + d.data.wide_cat + ": </div>"+
-                "Заплановані закупівлі: " + d3.format(",.2r")(d.data.plans) + "<br>"+
-                "Бюджетні кошти: " + d3.format(",.2r")(d.data.budget) + "<br>"+
-                "Грошові внески: " + d3.format(",.2r")(d.data.money) + "<br>"+
-                "Негрошові внески: " + d3.format(",.2r")(d.data.products) + "<br>";
+            return  tippyContent(d)
         })
         .attr("width", function (d) {  return stacked_xScale(d.data.plans) });
 

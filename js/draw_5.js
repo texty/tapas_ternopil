@@ -1,32 +1,4 @@
-var locale = d3.timeFormatLocale({
-    "dateTime": "%A, %e %B %Y г. %X",
-    "date": "%d.%m.%Y",
-    "time": "%H:%M:%S",
-    "periods": ["AM", "PM"],
-    "days": ["неділя", "понеділок", "вівторок", "середа", "четвер", "п'ятница", "субота"],
-    "shortDays": ["нд", "пн", "вт", "ср", "чт", "пт", "сб"],
-    "months": ["січ", "лют", "бер", "квіт", "трав", "черв", "лип", "серп", "вер", "жовт", "лист", "груд"],
-    "shortMonths": ["січ", "лют", "бер", "квіт", "трав", "черв", "лип", "серп", "вер", "жовт", "лист", "груд"]
-});
 
-var formatMillisecond = locale.format(".%L"),
-    formatSecond = locale.format(":%S"),
-    formatMinute = locale.format("%I:%M"),
-    formatHour = locale.format("%I %p"),
-    formatDay = locale.format("%a %d"),
-    formatWeek = locale.format("%b %d"),
-    formatMonth = locale.format("%B"),
-    formatYear = locale.format("%Y");
-
-function multiFormat(date) {
-    return (d3.timeSecond(date) < date ? formatMillisecond
-        : d3.timeMinute(date) < date ? formatSecond
-        : d3.timeHour(date) < date ? formatMinute
-        : d3.timeDay(date) < date ? formatHour
-        : d3.timeMonth(date) < date ? (d3.timeWeek(date) < date ? formatDay : formatWeek)
-        : d3.timeYear(date) < date ? formatMonth
-        : formatYear)(date);
-}
 
 var scatter_margin = {top: 120, right: 20, bottom: 50, left: 200},
     scatter_margin2 = {top: 30, right: 20, bottom: 30, left: 200},
@@ -135,10 +107,6 @@ var handleLines = gBrush.selectAll('.c-brush-handle')
     .attr("width", 0.5)
     .attr("x",0)
     ;
-
-
-
-
 
 
 
@@ -256,6 +224,10 @@ function draw_scatter(data){
     focusDots.exit().remove();
 
     focusDots
+        .attr("data-tippy-content", function(d) {
+            let tipyAmount = d.valueAmount >= 1000 ? moneyFormat(d.valueAmount): Math.round(d.valueAmount) ;
+            return "<b>"+d.wide_cat + '</b><br>' + d.date + ": " + tipyAmount + " грн"
+        })
         .transition()
         .duration(500)
         .attr("r", function(d){ return scatter_rScale(d.valueAmount) })
@@ -264,10 +236,8 @@ function draw_scatter(data){
         })
         .attr("cy", function (d) {
             return scatter_y(d.wide_cat);
-        })
-        .attr("data-tippy-content", function(d) {
-            return "<b>"+d.wide_cat + '</b><br>' + d.date + ": " + d.valueAmount + " грн"
         });
+
 
 
 
@@ -286,7 +256,8 @@ function draw_scatter(data){
                 return scatter_y(d.wide_cat);
             })
             .attr("data-tippy-content", function(d) {
-                return "<b>"+d.wide_cat + '</b><br>' + d.date + ": " + d.valueAmount + " грн"
+                let tipyAmount = d.valueAmount >= 1000 ? moneyFormat(d.valueAmount): Math.round(d.valueAmount) ;
+                return "<b>"+d.wide_cat + '</b><br>' + d.date + ": " + tipyAmount + " грн"
             })
             .on("mouseover", function(d){
                 d3.selectAll(".focus-dot").attr("r", function(d){ return scatter_rScale(d.valueAmount) });

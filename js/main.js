@@ -786,7 +786,8 @@ Promise.all([
                  let name = recipient_options.find(function(k){
                      return k.recipientID === d.school_id
                  });
-                    return name.recipientName + ": " + d3.format(",.2r")(d.sum) });
+                 return name.recipientName + ": " + moneyFormat(d.sum) + " грн";
+             });
 
 
          bar.enter().append("rect")
@@ -798,7 +799,7 @@ Promise.all([
                  let name = recipient_options.find(function(k){
                      return +k.recipientID === +d.school_id
                  });
-                     return name.recipientName + ": " + d3.format(",.2r")(d.sum);
+                 return name.recipientName + ": " + moneyFormat(d.sum) + " грн";
 
              })
              .on("click", function (d) {
@@ -832,7 +833,7 @@ Promise.all([
     tippy('.tip', {
         // trigger: 'click',
         allowHTML: true,
-        content: 'Global content',
+        // content: 'Global content',
         duration: 0,
         onShow(tip) {
             tip.setContent(tip.reference.getAttribute('data-tippy-content'))

@@ -26,8 +26,6 @@ svg_2.append("g")
 
 
 function draw_detail(df){
-
-   
     
     
     var new_width =  d3.select("#grid-clone").select("#col-2-clone").node().getBoundingClientRect().width - detail_margin.left - detail_margin.right;
@@ -76,15 +74,16 @@ function draw_detail(df){
     detail_bar
         .attr("height", detail_yScale.bandwidth() - 3)
         .attr("y", function (d, i) { return detail_yScale(d.category);  })
-        .transition().duration(zero_duration)
-        .attr("width", function (d) { return detail_xScale(d.sum);  })
         .attr("data-tippy-content", function(d) {
-            return d.category + ": " + d3.format(",.2r")(d.sum)
-        });
+            return d.category + ": " + moneyFormat(d.sum) + " грн";
+        })
+        .transition().duration(zero_duration)
+        .attr("width", function (d) { return detail_xScale(d.sum);  });
+
 
     detail_bar.enter().append("rect")
         .attr("data-tippy-content", function(d) {
-            return d.category + ": " + d3.format(",.2r")(d.sum)
+            return d.category + ": " + moneyFormat(d.sum) + " грн" ;
         })
         .attr("class", "detail tip")
         .attr("xVal", function (d) { return detail_yScale(d.category) })

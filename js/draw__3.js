@@ -83,6 +83,11 @@ function draw_time(df){
         });
 
     time_bar
+        .attr("data-tippy-content", function(d) {
+            let ind = real_tips.indexOf(d.month);
+            let tipyAmount = d.sum >= 1000 ? moneyFormat(d.sum): Math.round(d.sum) ;
+            return desire_tips[ind] + ": " + tipyAmount + " грн"
+        })
         .transition().duration(transition_time)
         .attr("y", function (d) { return time_yScale(d.sum)})
         .attr("x", function (d, i) { return time_xScale(d.month);  })
@@ -90,37 +95,28 @@ function draw_time(df){
         .attr("height", function (d) { return new_height - time_yScale(d.sum)})
         .attr("rx", time_xScale.bandwidth() / 2.5 )
         .attr("ry", time_xScale.bandwidth() / 2.5 )
-        .attr("data-tippy-content", function(d) {
-            let ind = real_tips.indexOf(d.month);
-            return desire_tips[ind] + ": " + d3.format(",.2r")(d.sum)
-        });
+        ;
 
     time_bar.enter().append("rect")
         .attr("class", "detail tip")
         .attr("rx", time_xScale.bandwidth() / 2.5 )
         .attr("ry", time_xScale.bandwidth() / 2.5 )
         .style("fill", saturatedBlue)
+        .attr("data-tippy-content", function(d) {
+            let ind = real_tips.indexOf(d.month);
+            let tipyAmount = d.sum >= 1000 ? moneyFormat(d.sum): Math.round(d.sum) ;
+            return desire_tips[ind] + ": " + tipyAmount + " грн"
+        })
         .transition().duration(transition_time)
         .attr("y", function (d) { return time_yScale(d.sum)})
         .attr("x", function (d, i) { return time_xScale(d.month);  })
         .attr("width",  time_xScale.bandwidth() )
         .attr("height", function (d) { return new_height - time_yScale(d.sum)})
-        .attr("data-tippy-content", function(d) {
-            let ind = real_tips.indexOf(d.month);
-            return desire_tips[ind] + ": " + d3.format(",.2r")(d.sum)
-        });
+        ;
 
 
     time_bar.exit().remove();
 
-    // tippy('.tip', {
-    //     allowHTML: true,
-    //     content: 'Global content',
-    //     duration: 0,
-    //     onShow(tip) {
-    //         tip.setContent(tip.reference.getAttribute('data-tippy-content'))
-    //     }
-    //
-    // });
+
 
 }
