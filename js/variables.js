@@ -135,9 +135,9 @@ function multiFormat(date) {
 
 //
 var localeMoney = d3.formatLocale({
-    decimal: "",
+    decimal: ".",
     thousands: " ",
     grouping: [3]
 });
 
-var moneyFormat = localeMoney.format(",.2r");
+var moneyFormat = localeMoney.format(",");

@@ -140,6 +140,7 @@ function draw_stacked(df){
         .attr("data-tippy-content", function(d) {
             return  tippyContent(d)
         })
+        .on("click", function(d){ console.log(d.data )})
         .merge(bars)
         .attr("height", stacked_yScale.bandwidth())
         .attr("y", function (d) { return stacked_yScale(d.data.wide_cat); })
